@@ -1823,6 +1823,7 @@ pre .javascript .function {
   font-size: 13px;
   color: #999;
 }
+m,
 .site-author-image {
   display: block;
   margin: 0 auto;
@@ -2003,7 +2004,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #11ff7f;
+  background: #9cc481;
 }
 .links-of-blogroll {
   font-size: 13px;
