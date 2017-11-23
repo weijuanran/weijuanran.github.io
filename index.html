@@ -269,7 +269,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://weijuanran.cn/2017/11/19/first blog/">
+    <link itemprop="mainEntityOfPage" href="http://weijuanran.cn/2017/11/22/Regular-Expression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="weijuanran">
@@ -288,7 +288,176 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/19/first blog/" itemprop="url">My first blog</a></h1>
+                <a class="post-title-link" href="/2017/11/22/Regular-Expression/" itemprop="url">Regular Expression</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-22T16:00:45+08:00">
+                2017-11-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2017-11-23T10:37:05+08:00">
+                2017-11-23
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Universal/" itemprop="url" rel="index">
+                    <span itemprop="name">Universal</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>we use regular expression to match strings,for example to judge whether the string is a legal email address or telephone number.I have summarized common usage of Regular Expression, as follows:<br>1 Basic Qualifiers:<br>“\d”：Match a numeric character. Equivalent to [0-9].<br>“\w”: Matches a letter, number, or underscore. Equivalent to “[A-Za-z0-9_]”.<br>“\s”: Matches a blank character, including spaces, tabs, pages breaks, and so on. Equivalent to [\f\n\r\t\v].<br>“\b”: Matches a word boundary, such as “is” in the matching string “It is RegExp”, can be written as “\bis\b”, here “\b” identifies whether the word “is” is the word boundary.</p>
+<p>2 Special Qualifiers:<br>“^”: Matches the start of the input string. If you set the Multiline property of a RegExp object, “^” also can match the position after “\n” or “\r”.<br>“$”: Matches the end of the input string. If you set the Multiline property of a RegExp object, “$” also can match the position before “\n” or “\r”.<br>“.”: Matches any single character other than “\n”. To match any character including “\n”, we can use a pattern like “(.|\n)”.<br>“?”: Matches the previous subexpression zero or once. For example, “th(is)?” Matches “th” or “this”. “?” is equivalent to {0,1}.</p>
+<p>3 Range Qualifiers:<br>“{n}”: Matches n times. For example, “o{2}” does not match “o” in “god”, but can match double “o” in “good”.<br>“{n,}”: Matches at least n times. For example, “o{2,}” does not match “o” in “god”, but matches all “o” in “goooood.” Thus,we can find that “O{1,}” is equivalent to “o+”. “O{0,}” is equivalent to “o*”.<br>“{n,m}”: Matches at least n times and at most m times. For example, “o{1,3}” will match the first three “o” of “gooooood”. “O{0,1}” is equivalent to “o?”</p>
+<p>4 Greedy Qualifiers:<br>“<em>“: Matches the previous subexpression zero or more times. Greedy match,  matches all in priority. For example, “go</em>“ matches “g” and “goo”. “*” Equivalent to {0,}.<br>“+”: Matches the previous subexpression one or more times. Greedy match,  matches all in priority. For example, “go+” matches “go” and “goo”, but can not match “g”. “+” is equivalent to {1,}.</p>
+<p>5 Non-Greedy Qualifiers:<br>when “?” follows immediately after any of the other qualifiers (<em>, +,?, {n}, {n,}, {n, m}), the match patterns are non-greedy.<br>“</em>?”: Matches any times, but match as little as possible.<br>“+?”: Matches one or more times, but match as little as possible.<br>“??”: Matches zero or once, but match as little as possible.<br>“{n}?”: Matches n times, but match as little as possible.<br>“{n,}?”: Matches at least n times, but match as little as possible.<br>“{n,m}?”: Matches at least n times and at most m times, but match as little as possible.</p>
+<p>6 Advanced Qualifiers:<br>“(express)”: Matches express, and capture the text to the automatically named group.<br>“(?<name>express)”: Matches express and capture the text into a group named name.<br>“(?:express)”: Matches express, does not capture the matched text.<br>“(?=express)”: Matches the position before express. For example, “I am learning RegExp”, using”.+(?=RegExp)”,the result is “I am learning”.<br>“(?&lt;=express)”: Matches the position after express. For example, “I am learning RegExp”,using”(?&lt;=am&gt;).+”,the result is “learning RegExp”.<br>“(?!express)”: Matches the position unequal to express before. For example, “123abc”,using”\d{3}(?!\d)” to match.<br>“(?&lt;!express)”: Matches the position unequal to express after. For example, “abc123”,using”(?&lt;![0-9])123” to match.</name></p>
+<p>7 Antonyms Qualifiers:<br>“\D”: Matches any character that is not number.<br>“\W”: Matches any character that is not letter, number, or underscore.<br>“\S”: Matches any character that is not a blank character.<br>“\B”: Matches position that is not the beginning or end of a word.</p>
+<p>8 Other Qualifiers:<br>“x|y”: Matches x or y.<br>“[xyz]”: Matches any one of the characters contained. For example, “[abc]” can match “a” in “apple”.<br>“[^xyz]”: Matches any character that is not included. For example, “[^abc]” can match “p” in “apple”.<br>“[a-z]”: Matches any character in the specified range. For example, “[a-z]” can match any lowercase alphabetic character from “a” to “z”.<br>“[^a-z]”: Matches any character that is not within the specified range. For example, “[^a-z]” can match any character that is not in the “a” through “z” range.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+    
+    </div>
+
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weijuanran.cn/2017/11/19/First Blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="weijuanran">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="weijuanran">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/19/First Blog/" itemprop="url">My first blog</a></h1>
         
 
         <div class="post-meta">
@@ -446,12 +615,21 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
             
 
             
@@ -459,7 +637,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Tags," />
+  <meta name="keywords" content="RegExp," />
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="This is my first blog,I have finished my blog builds using hexo+github with renkai’s help.If you want to build your personal blog,I recommend you reference to t">
-<meta name="keywords" content="Tags">
+<meta name="description" content="we use regular expression to match strings,for example to judge whether the string is a legal email address or telephone number.I have summarized common usage o">
+<meta name="keywords" content="RegExp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="My first blog">
-<meta property="og:url" content="http://weijuanran.cn/2017/11/19/First Blog/index.html">
+<meta property="og:title" content="Regular Expression">
+<meta property="og:url" content="http://weijuanran.cn/2017/11/22/Regular-Expression/index.html">
 <meta property="og:site_name" content="weijuanran">
-<meta property="og:description" content="This is my first blog,I have finished my blog builds using hexo+github with renkai’s help.If you want to build your personal blog,I recommend you reference to this post.Hexo+Github Tutorials">
+<meta property="og:description" content="we use regular expression to match strings,for example to judge whether the string is a legal email address or telephone number.I have summarized common usage of Regular Expression, as follows:1 Basic">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-11-21T07:53:57.892Z">
+<meta property="og:updated_time" content="2017-11-23T02:37:05.829Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="My first blog">
-<meta name="twitter:description" content="This is my first blog,I have finished my blog builds using hexo+github with renkai’s help.If you want to build your personal blog,I recommend you reference to this post.Hexo+Github Tutorials">
+<meta name="twitter:title" content="Regular Expression">
+<meta name="twitter:description" content="we use regular expression to match strings,for example to judge whether the string is a legal email address or telephone number.I have summarized common usage of Regular Expression, as follows:1 Basic">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://weijuanran.cn/2017/11/19/First Blog/"/>
+  <link rel="canonical" href="http://weijuanran.cn/2017/11/22/Regular-Expression/"/>
 
 
 
 
 
-  <title>My first blog | weijuanran</title>
+  <title>Regular Expression | weijuanran</title>
   
 
 
@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://weijuanran.cn/2017/11/19/First Blog/">
+    <link itemprop="mainEntityOfPage" href="http://weijuanran.cn/2017/11/22/Regular-Expression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="weijuanran">
@@ -287,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">My first blog</h1>
+          <h1 class="post-title" itemprop="name headline">Regular Expression</h1>
         
 
         <div class="post-meta">
@@ -299,8 +299,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-19T16:14:41+08:00">
-                2017-11-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-22T16:00:45+08:00">
+                2017-11-22
               </time>
             
 
@@ -315,12 +315,34 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2017-11-21T15:53:57+08:00">
-                2017-11-21
+              <time title="Post modified" itemprop="dateModified" datetime="2017-11-23T10:37:05+08:00">
+                2017-11-23
               </time>
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Universal/" itemprop="url" rel="index">
+                    <span itemprop="name">Universal</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -349,7 +371,14 @@
       
 
       
-        <p>  This is my first blog,I have finished my blog builds using hexo+github with renkai’s help.If you want to build your personal blog,I recommend you reference to this post.<br><a href="http://blog.renkaigis.com/posts/Github/Hexo/2017-06-09-Hexo-Github-build-blog-so-easy.html" target="_blank" rel="noopener">Hexo+Github Tutorials</a></p>
+        <p>we use regular expression to match strings,for example to judge whether the string is a legal email address or telephone number.I have summarized common usage of Regular Expression, as follows:<br>1 Basic Qualifiers:<br>“\d”：Match a numeric character. Equivalent to [0-9].<br>“\w”: Matches a letter, number, or underscore. Equivalent to “[A-Za-z0-9_]”.<br>“\s”: Matches a blank character, including spaces, tabs, pages breaks, and so on. Equivalent to [\f\n\r\t\v].<br>“\b”: Matches a word boundary, such as “is” in the matching string “It is RegExp”, can be written as “\bis\b”, here “\b” identifies whether the word “is” is the word boundary.</p>
+<p>2 Special Qualifiers:<br>“^”: Matches the start of the input string. If you set the Multiline property of a RegExp object, “^” also can match the position after “\n” or “\r”.<br>“$”: Matches the end of the input string. If you set the Multiline property of a RegExp object, “$” also can match the position before “\n” or “\r”.<br>“.”: Matches any single character other than “\n”. To match any character including “\n”, we can use a pattern like “(.|\n)”.<br>“?”: Matches the previous subexpression zero or once. For example, “th(is)?” Matches “th” or “this”. “?” is equivalent to {0,1}.</p>
+<p>3 Range Qualifiers:<br>“{n}”: Matches n times. For example, “o{2}” does not match “o” in “god”, but can match double “o” in “good”.<br>“{n,}”: Matches at least n times. For example, “o{2,}” does not match “o” in “god”, but matches all “o” in “goooood.” Thus,we can find that “O{1,}” is equivalent to “o+”. “O{0,}” is equivalent to “o*”.<br>“{n,m}”: Matches at least n times and at most m times. For example, “o{1,3}” will match the first three “o” of “gooooood”. “O{0,1}” is equivalent to “o?”</p>
+<p>4 Greedy Qualifiers:<br>“<em>“: Matches the previous subexpression zero or more times. Greedy match,  matches all in priority. For example, “go</em>“ matches “g” and “goo”. “*” Equivalent to {0,}.<br>“+”: Matches the previous subexpression one or more times. Greedy match,  matches all in priority. For example, “go+” matches “go” and “goo”, but can not match “g”. “+” is equivalent to {1,}.</p>
+<p>5 Non-Greedy Qualifiers:<br>when “?” follows immediately after any of the other qualifiers (<em>, +,?, {n}, {n,}, {n, m}), the match patterns are non-greedy.<br>“</em>?”: Matches any times, but match as little as possible.<br>“+?”: Matches one or more times, but match as little as possible.<br>“??”: Matches zero or once, but match as little as possible.<br>“{n}?”: Matches n times, but match as little as possible.<br>“{n,}?”: Matches at least n times, but match as little as possible.<br>“{n,m}?”: Matches at least n times and at most m times, but match as little as possible.</p>
+<p>6 Advanced Qualifiers:<br>“(express)”: Matches express, and capture the text to the automatically named group.<br>“(?<name>express)”: Matches express and capture the text into a group named name.<br>“(?:express)”: Matches express, does not capture the matched text.<br>“(?=express)”: Matches the position before express. For example, “I am learning RegExp”, using”.+(?=RegExp)”,the result is “I am learning”.<br>“(?&lt;=express)”: Matches the position after express. For example, “I am learning RegExp”,using”(?&lt;=am&gt;).+”,the result is “learning RegExp”.<br>“(?!express)”: Matches the position unequal to express before. For example, “123abc”,using”\d{3}(?!\d)” to match.<br>“(?&lt;!express)”: Matches the position unequal to express after. For example, “abc123”,using”(?&lt;![0-9])123” to match.</name></p>
+<p>7 Antonyms Qualifiers:<br>“\D”: Matches any character that is not number.<br>“\W”: Matches any character that is not letter, number, or underscore.<br>“\S”: Matches any character that is not a blank character.<br>“\B”: Matches position that is not the beginning or end of a word.</p>
+<p>8 Other Qualifiers:<br>“x|y”: Matches x or y.<br>“[xyz]”: Matches any one of the characters contained. For example, “[abc]” can match “a” in “apple”.<br>“[^xyz]”: Matches any character that is not included. For example, “[^abc]” can match “p” in “apple”.<br>“[a-z]”: Matches any character in the specified range. For example, “[a-z]” can match any lowercase alphabetic character from “a” to “z”.<br>“[^a-z]”: Matches any character that is not within the specified range. For example, “[^a-z]” can match any character that is not in the “a” through “z” range.</p>
 
       
     </div>
@@ -372,6 +401,37 @@
     <div>
       
         
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>title:</span><a href="/2017/11/22/Regular-Expression/">Regular Expression</a></p>
+  <p><span>author:</span><a href="/" title="visit weijuanran 's personal blog">weijuanran</a></p>
+  <p><span>pubtime:</span>2017年11月22日 - 16:11</p>
+  <p><span>update:</span>2017/11/23 - 10:11</p>
+  <p><span>original:</span><a href="/2017/11/22/Regular-Expression/" title="Regular Expression">http://weijuanran.cn/2017/11/22/Regular-Expression/</a>
+    <span class="copy-path"  title="click to copy"><i class="fa fa-clipboard" data-clipboard-text="http://weijuanran.cn/2017/11/22/Regular-Expression/"  aria-label="success！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: 'success',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
       
     </div>
 
@@ -386,7 +446,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://weijuanran.cn/2017/11/19/First Blog/" title="My first blog">http://weijuanran.cn/2017/11/19/First Blog/</a>
+    <a href="http://weijuanran.cn/2017/11/22/Regular-Expression/" title="Regular Expression">http://weijuanran.cn/2017/11/22/Regular-Expression/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -401,7 +461,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Tags/" rel="tag"><i class="fa fa-tag"></i>Tags</a>
+            <a href="/tags/RegExp/" rel="tag"><i class="fa fa-tag"></i>RegExp</a>
           
         </div>
       
@@ -414,15 +474,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/11/19/First Blog/" rel="next" title="My first blog">
+                <i class="fa fa-chevron-left"></i> My first blog
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/22/Regular-Expression/" rel="prev" title="Regular Expression">
-                Regular Expression <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
