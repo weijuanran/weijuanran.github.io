@@ -1652,13 +1652,6 @@ pre .javascript .function {
 .fancybox-close:hover {
   border: none;
 }
-.post-copyright {
-  margin: 2em 0 0;
-  padding: 0.5em 1em;
-  border-left: 3px solid #ff1700;
-  background-color: #f9f9f9;
-  list-style: none;
-}
 .rtl.post-body p,
 .rtl.post-body a,
 .rtl.post-body h1,
@@ -1701,11 +1694,11 @@ pre .javascript .function {
   width: 5em;
 }
 .my_post_copyright a {
-  color: #808080;
+  color: #0593d3;
   border-bottom: 0;
 }
 .my_post_copyright a:hover {
-  color: #a3d2a3;
+  color: #fc6423;
   text-decoration: underline;
 }
 .my_post_copyright:hover .fa-clipboard {
@@ -2004,7 +1997,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #c878ff;
+  background: #6aad75;
 }
 .links-of-blogroll {
   font-size: 13px;
