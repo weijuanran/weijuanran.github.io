@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="we use regular expression to match strings,for example to judge whether the string is a legal email address or telephone number.I have summarized common usage o">
+<meta name="description" content="We use Regular Expression to match strings,for example to judge whether the string is a legal email address or telephone number.I have summarized common usage o">
 <meta name="keywords" content="RegExp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Regular Expression">
-<meta property="og:url" content="http://weijuanran.cn/2017/11/22/Regular-Expression/index.html">
+<meta property="og:url" content="http://weijuanran.cn/Regular-Expression/index.html">
 <meta property="og:site_name" content="weijuanran">
-<meta property="og:description" content="we use regular expression to match strings,for example to judge whether the string is a legal email address or telephone number.I have summarized common usage of Regular Expression, as follows:1 Basic">
+<meta property="og:description" content="We use Regular Expression to match strings,for example to judge whether the string is a legal email address or telephone number.I have summarized common usage of Regular Expression, as follows: 1 Basi">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-11-23T02:37:05.829Z">
+<meta property="og:updated_time" content="2017-11-23T07:50:18.699Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Regular Expression">
-<meta name="twitter:description" content="we use regular expression to match strings,for example to judge whether the string is a legal email address or telephone number.I have summarized common usage of Regular Expression, as follows:1 Basic">
+<meta name="twitter:description" content="We use Regular Expression to match strings,for example to judge whether the string is a legal email address or telephone number.I have summarized common usage of Regular Expression, as follows: 1 Basi">
 
 
 
@@ -127,7 +127,7 @@
 
 
 
-  <link rel="canonical" href="http://weijuanran.cn/2017/11/22/Regular-Expression/"/>
+  <link rel="canonical" href="http://weijuanran.cn/Regular-Expression/"/>
 
 
 
@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://weijuanran.cn/2017/11/22/Regular-Expression/">
+    <link itemprop="mainEntityOfPage" href="http://weijuanran.cn/Regular-Expression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="weijuanran">
@@ -305,19 +305,7 @@
             
 
             
-              <span class="post-meta-divider">|</span>
-            
 
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Post modified&#58;</span>
-              
-              <time title="Post modified" itemprop="dateModified" datetime="2017-11-23T10:37:05+08:00">
-                2017-11-23
-              </time>
             
           </span>
 
@@ -371,14 +359,15 @@
       
 
       
-        <p>we use regular expression to match strings,for example to judge whether the string is a legal email address or telephone number.I have summarized common usage of Regular Expression, as follows:<br>1 Basic Qualifiers:<br>“\d”：Match a numeric character. Equivalent to [0-9].<br>“\w”: Matches a letter, number, or underscore. Equivalent to “[A-Za-z0-9_]”.<br>“\s”: Matches a blank character, including spaces, tabs, pages breaks, and so on. Equivalent to [\f\n\r\t\v].<br>“\b”: Matches a word boundary, such as “is” in the matching string “It is RegExp”, can be written as “\bis\b”, here “\b” identifies whether the word “is” is the word boundary.</p>
-<p>2 Special Qualifiers:<br>“^”: Matches the start of the input string. If you set the Multiline property of a RegExp object, “^” also can match the position after “\n” or “\r”.<br>“$”: Matches the end of the input string. If you set the Multiline property of a RegExp object, “$” also can match the position before “\n” or “\r”.<br>“.”: Matches any single character other than “\n”. To match any character including “\n”, we can use a pattern like “(.|\n)”.<br>“?”: Matches the previous subexpression zero or once. For example, “th(is)?” Matches “th” or “this”. “?” is equivalent to {0,1}.</p>
-<p>3 Range Qualifiers:<br>“{n}”: Matches n times. For example, “o{2}” does not match “o” in “god”, but can match double “o” in “good”.<br>“{n,}”: Matches at least n times. For example, “o{2,}” does not match “o” in “god”, but matches all “o” in “goooood.” Thus,we can find that “O{1,}” is equivalent to “o+”. “O{0,}” is equivalent to “o*”.<br>“{n,m}”: Matches at least n times and at most m times. For example, “o{1,3}” will match the first three “o” of “gooooood”. “O{0,1}” is equivalent to “o?”</p>
-<p>4 Greedy Qualifiers:<br>“<em>“: Matches the previous subexpression zero or more times. Greedy match,  matches all in priority. For example, “go</em>“ matches “g” and “goo”. “*” Equivalent to {0,}.<br>“+”: Matches the previous subexpression one or more times. Greedy match,  matches all in priority. For example, “go+” matches “go” and “goo”, but can not match “g”. “+” is equivalent to {1,}.</p>
-<p>5 Non-Greedy Qualifiers:<br>when “?” follows immediately after any of the other qualifiers (<em>, +,?, {n}, {n,}, {n, m}), the match patterns are non-greedy.<br>“</em>?”: Matches any times, but match as little as possible.<br>“+?”: Matches one or more times, but match as little as possible.<br>“??”: Matches zero or once, but match as little as possible.<br>“{n}?”: Matches n times, but match as little as possible.<br>“{n,}?”: Matches at least n times, but match as little as possible.<br>“{n,m}?”: Matches at least n times and at most m times, but match as little as possible.</p>
-<p>6 Advanced Qualifiers:<br>“(express)”: Matches express, and capture the text to the automatically named group.<br>“(?<name>express)”: Matches express and capture the text into a group named name.<br>“(?:express)”: Matches express, does not capture the matched text.<br>“(?=express)”: Matches the position before express. For example, “I am learning RegExp”, using”.+(?=RegExp)”,the result is “I am learning”.<br>“(?&lt;=express)”: Matches the position after express. For example, “I am learning RegExp”,using”(?&lt;=am&gt;).+”,the result is “learning RegExp”.<br>“(?!express)”: Matches the position unequal to express before. For example, “123abc”,using”\d{3}(?!\d)” to match.<br>“(?&lt;!express)”: Matches the position unequal to express after. For example, “abc123”,using”(?&lt;![0-9])123” to match.</name></p>
-<p>7 Antonyms Qualifiers:<br>“\D”: Matches any character that is not number.<br>“\W”: Matches any character that is not letter, number, or underscore.<br>“\S”: Matches any character that is not a blank character.<br>“\B”: Matches position that is not the beginning or end of a word.</p>
-<p>8 Other Qualifiers:<br>“x|y”: Matches x or y.<br>“[xyz]”: Matches any one of the characters contained. For example, “[abc]” can match “a” in “apple”.<br>“[^xyz]”: Matches any character that is not included. For example, “[^abc]” can match “p” in “apple”.<br>“[a-z]”: Matches any character in the specified range. For example, “[a-z]” can match any lowercase alphabetic character from “a” to “z”.<br>“[^a-z]”: Matches any character that is not within the specified range. For example, “[^a-z]” can match any character that is not in the “a” through “z” range.</p>
+        <p>We use Regular Expression to match strings,for example to judge whether the string is a legal email address or telephone number.I have summarized common usage of Regular Expression, as follows:</p>
+<h4 id="1-Basic-Qualifiers"><a href="#1-Basic-Qualifiers" class="headerlink" title="1 Basic Qualifiers:"></a>1 Basic Qualifiers:</h4><p>“<strong>\d</strong>“：Matches a numeric character. Equivalent to <lable style="color:#DC143C;background:#d8d8d8">[0-9]</lable>.<br>“<strong>\w</strong>“: Matches a letter, number, or underscore. Equivalent to <lable style="color:#DC143C;background:#d8d8d8">[A-Za-z0-9_]</lable>.<br>“<strong>\s</strong>“: Matches a blank character, including spaces, tabs, pages breaks, and so on. Equivalent to <lable style="color:#DC143C;background:#d8d8d8">[\f\n\r\t\v]</lable>.<br>“<strong>\b</strong>“: Matches a word boundary, such as “is” in the matching string “It is RegExp”,can be written as <lable style="color:#DC143C;background:#d8d8d8">\bis\b</lable>, here <lable style="color:#DC143C;background:#d8d8d8">\b</lable> identifies whether the word “is” is the word boundary.<br><a id="more"></a></p>
+<h4 id="2-Special-Qualifiers"><a href="#2-Special-Qualifiers" class="headerlink" title="2 Special Qualifiers:"></a>2 Special Qualifiers:</h4><p>“<strong>^</strong>“: Matches the start of the input string. If you set the Multiline property of a RegExp object, <lable style="color:#DC143C;background:#d8d8d8">^</lable> also can match the position after <lable style="color:#DC143C;background:#d8d8d8">\n</lable> or <lable style="color:#DC143C;background:#d8d8d8">\r</lable>.<br>“<strong>$</strong>“: Matches the end of the input string. If you set the Multiline property of a RegExp object, <lable style="color:#DC143C;background:#d8d8d8">$</lable> also can match the position before <lable style="color:#DC143C;background:#d8d8d8">\n</lable> or <lable style="color:#DC143C;background:#d8d8d8">\r</lable>.<br>“<strong>.</strong>“: Matches any single character other than <lable style="color:#DC143C;background:#d8d8d8">\n</lable>. To match any character including <lable style="color:#DC143C;background:#d8d8d8">\n</lable>, we can use a pattern like <lable style="color:#DC143C;background:#d8d8d8">(.|\n)</lable>.<br>“<strong>?</strong>“: Matches the previous subexpression zero or once. For example, <lable style="color:#DC143C;background:#d8d8d8">th(is)?</lable> Matches “th” or “this”. <lable style="color:#DC143C;background:#d8d8d8">?</lable> is equivalent to <lable style="color:#DC143C;background:#d8d8d8">{0,1}</lable>.</p>
+<h4 id="3-Range-Qualifiers"><a href="#3-Range-Qualifiers" class="headerlink" title="3 Range Qualifiers:"></a>3 Range Qualifiers:</h4><p>“<strong>{n}</strong>“: Matches n times. For example, <lable style="color:#DC143C;background:#d8d8d8">o{2}</lable> does not match “o” in “god”, but can match double “o” in “good”.<br>“<strong>{n,}</strong>“: Matches at least n times. For example, <lable style="color:#DC143C;background:#d8d8d8">o{2,}</lable> does not match “o” in “god”, but matches all “o” in “goooood”. Thus,we can find that <lable style="color:#DC143C;background:#d8d8d8">o{1,}</lable> is equivalent to <lable style="color:#DC143C;background:#d8d8d8">o+</lable>. <lable style="color:#DC143C;background:#d8d8d8">o{0,}</lable> is equivalent to <lable style="color:#DC143C;background:#d8d8d8">o*</lable>.<br>“<strong>{n,m}</strong>“: Matches at least n times and at most m times. For example, <lable style="color:#DC143C;background:#d8d8d8">o{1,3}</lable> will match the first three “o” of “gooooood”. <lable style="color:#DC143C;background:#d8d8d8">o{0,1}</lable> is equivalent to <lable style="color:#DC143C;background:#d8d8d8">o?</lable>.</p>
+<h4 id="4-Greedy-Qualifiers"><a href="#4-Greedy-Qualifiers" class="headerlink" title="4 Greedy Qualifiers:"></a>4 Greedy Qualifiers:</h4><p>“<strong>*</strong>“: Matches the previous subexpression zero or more times.Greedy match,matches all in priority. For example, <lable style="color:#DC143C;background:#d8d8d8">go*</lable> matches “g” and “goo”. <lable style="color:#DC143C;background:#d8d8d8">*</lable>is equivalent to <lable style="color:#DC143C;background:#d8d8d8">{0,}</lable>.<br>“<strong>+</strong>“: Matches the previous subexpression one or more times.Greedy match,  matches all in priority. For example, <lable style="color:#DC143C;background:#d8d8d8">go+</lable> matches “go” and “goo”, but can not match “g”. <lable style="color:#DC143C;background:#d8d8d8">+</lable> is equivalent to <lable style="color:#DC143C;background:#d8d8d8">{1,}</lable>.</p>
+<h4 id="5-Non-Greedy-Qualifiers"><a href="#5-Non-Greedy-Qualifiers" class="headerlink" title="5 Non-Greedy Qualifiers:"></a>5 Non-Greedy Qualifiers:</h4><p>when <lable style="color:#DC143C;background:#d8d8d8">?</lable> follows immediately after any of the other qualifiers<lable style="color:#DC143C;background:#d8d8d8">(*, +,?, {n}, {n,}, {n, m})</lable>, the match patterns are non-greedy.<br>“<strong>*?</strong>“: Matches any times, but match as little as possible.<br>“<strong>+?</strong>“: Matches one or more times, but match as little as possible.<br>“<strong>??</strong>“: Matches zero or once, but match as little as possible.<br>“<strong>{n}?</strong>“: Matches n times, but match as little as possible.<br>“<strong>{n,}?</strong>“: Matches at least n times, but match as little as possible.<br>“<strong>{n,m}?</strong>“: Matches at least n times and at most m times, but match as little as possible.</p>
+<h4 id="6-Advanced-Qualifiers"><a href="#6-Advanced-Qualifiers" class="headerlink" title="6 Advanced Qualifiers:"></a>6 Advanced Qualifiers:</h4><p>“<strong>(express)</strong>“: Matches express, and capture the text to the automatically named group.<br>“<strong>(?<name>express)</name></strong>“: Matches express and capture the text into a group named name.<br>“<strong>(?:express)</strong>“: Matches express, does not capture the matched text.<br>“<strong>(?=express)</strong>“: Matches the position before express. For example, “I am learning RegExp”, using<lable style="color:#DC143C;background:#d8d8d8">.+(?=RegExp)</lable>,the result is “I am learning”.<br>“<strong>(?&lt;=express)</strong>“: Matches the position after express. For example, “I am learning RegExp”,using<lable style="color:#DC143C;background:#d8d8d8">(?&lt;=am&gt;).+</lable>,the result is “learning RegExp”.<br>“<strong>(?!express)</strong>“: Matches the position unequal to express before. For example, “123abc”,using<lable style="color:#DC143C;background:#d8d8d8">\d{3}(?!\d)</lable> to match.<br>“<strong>(?&lt;!express)</strong>“: Matches the position unequal to express after. For example, “abc123”,using<lable style="color:#DC143C;background:#d8d8d8">(?&lt;![0-9])123</lable> to match.</p>
+<h4 id="7-Antonyms-Qualifiers"><a href="#7-Antonyms-Qualifiers" class="headerlink" title="7 Antonyms Qualifiers:"></a>7 Antonyms Qualifiers:</h4><p>Transfor the lowercase letter to uppercase,and the meaning is opposite.<br>“<strong>\D</strong>“: Matches any character that is not number.<br>“<strong>\W</strong>“: Matches any character that is not letter, number, or underscore.<br>“<strong>\S</strong>“: Matches any character that is not a blank character.<br>“<strong>\B</strong>“: Matches position that is not the beginning or end of a word.</p>
+<h4 id="8-Other-Qualifiers"><a href="#8-Other-Qualifiers" class="headerlink" title="8 Other Qualifiers:"></a>8 Other Qualifiers:</h4><p>“<strong>x|y</strong>“: Matches x or y.<br>“<strong>[xyz]</strong>“: Matches any one of the characters contained. For example, <lable style="color:#DC143C;background:#d8d8d8">[abc]</lable> can match “a” in “apple”.<br>“<strong>[^xyz]</strong>“: Matches any character that is not included. For example, <lable style="color:#DC143C;background:#d8d8d8">[^abc]</lable> can match “p” in “apple”.<br>“<strong>[a-z]</strong>“: Matches any character in the specified range. For example, <lable style="color:#DC143C;background:#d8d8d8">[a-z]</lable> can match any lowercase alphabetic character from “a” to “z”.<br>“<strong>[^a-z]</strong>“: Matches any character that is not within the specified range. For example, <lable style="color:#DC143C;background:#d8d8d8">[^a-z]</lable> can match any character that is not in the “a” through “z” range.</p>
 
       
     </div>
@@ -408,14 +397,15 @@
   <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
-  <p><span>title:</span><a href="/2017/11/22/Regular-Expression/">Regular Expression</a></p>
-  <p><span>author:</span><a href="/" title="visit weijuanran 's personal blog">weijuanran</a></p>
-  <p><span>pubtime:</span>2017年11月22日 - 16:11</p>
-  <p><span>update:</span>2017/11/23 - 10:11</p>
-  <p><span>original:</span><a href="/2017/11/22/Regular-Expression/" title="Regular Expression">http://weijuanran.cn/2017/11/22/Regular-Expression/</a>
-    <span class="copy-path"  title="click to copy"><i class="fa fa-clipboard" data-clipboard-text="http://weijuanran.cn/2017/11/22/Regular-Expression/"  aria-label="success！"></i></span>
+  <p><span>title:</span>Regular Expression</p>
+  <p><span>author:</span>weijuanran</p>
+  <p><span>pubtime:</span>2017/11/22 - 16:11</p>
+  <p><span>update:</span>2017/11/23 - 15:11</p>
+  <p><span>original:</span><a href="/Regular-Expression/" title="Regular Expression">http://weijuanran.cn/Regular-Expression/</a>
+    <span class="copy-path"  title="click to copy"><i class="fa fa-clipboard" data-clipboard-text="http://weijuanran.cn/Regular-Expression/"  aria-label="success！"></i></span>
   </p>
-  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+  <p><span>agree:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">Attribution-NonCommercial-NoDerivatives 4.0 International</a></p>  
+  <p><span></span> Reprinted please keep the original link and author.</p>
 </div>
 <script> 
     var clipboard = new Clipboard('.fa-clipboard');
@@ -438,24 +428,6 @@
     
 
     
-      <div>
-        <ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>Post author:</strong>
-    weijuanran
-  </li>
-  <li class="post-copyright-link">
-    <strong>Post link:</strong>
-    <a href="http://weijuanran.cn/2017/11/22/Regular-Expression/" title="Regular Expression">http://weijuanran.cn/2017/11/22/Regular-Expression/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>Copyright Notice: </strong>
-    All articles in this blog are licensed under <a href="" rel="external nofollow" target="_blank"></a> unless stating additionally.
-  </li>
-</ul>
-
-      </div>
-    
 
     <footer class="post-footer">
       
@@ -474,7 +446,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/19/First Blog/" rel="next" title="My first blog">
+              <a href="/First Blog/" rel="next" title="My first blog">
                 <i class="fa fa-chevron-left"></i> My first blog
               </a>
             
@@ -560,8 +532,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -653,6 +634,22 @@ var jiathis_config={
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Basic-Qualifiers"><span class="nav-number">1.</span> <span class="nav-text">1 Basic Qualifiers:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Special-Qualifiers"><span class="nav-number">2.</span> <span class="nav-text">2 Special Qualifiers:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Range-Qualifiers"><span class="nav-number">3.</span> <span class="nav-text">3 Range Qualifiers:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Greedy-Qualifiers"><span class="nav-number">4.</span> <span class="nav-text">4 Greedy Qualifiers:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Non-Greedy-Qualifiers"><span class="nav-number">5.</span> <span class="nav-text">5 Non-Greedy Qualifiers:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Advanced-Qualifiers"><span class="nav-number">6.</span> <span class="nav-text">6 Advanced Qualifiers:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-Antonyms-Qualifiers"><span class="nav-number">7.</span> <span class="nav-text">7 Antonyms Qualifiers:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-Other-Qualifiers"><span class="nav-number">8.</span> <span class="nav-text">8 Other Qualifiers:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -673,6 +670,15 @@ var jiathis_config={
   </span>
   <span class="author" itemprop="copyrightHolder">weijuanran</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
   
 </div>
 
