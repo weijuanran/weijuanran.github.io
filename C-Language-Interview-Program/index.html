@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg?v=">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="整理了一些C语言的程序阅读题，主要是程序的对错、程序的输出结果以及解释为什么？ 数组和指针数组和指针的存储写出下面的输出结果：">
+<meta name="keywords" content="C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言面试程序阅读整理">
+<meta property="og:url" content="http://weijuanran.cn/C-Language-Interview-Program/index.html">
+<meta property="og:site_name" content="weijuanran">
+<meta property="og:description" content="整理了一些C语言的程序阅读题，主要是程序的对错、程序的输出结果以及解释为什么？ 数组和指针数组和指针的存储写出下面的输出结果：">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-05-13T07:46:13.979Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言面试程序阅读整理">
+<meta name="twitter:description" content="整理了一些C语言的程序阅读题，主要是程序的对错、程序的输出结果以及解释为什么？ 数组和指针数组和指针的存储写出下面的输出结果：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://weijuanran.cn/C-Language-Interview-Program/"/>
+
+
+
+
+
+  <title>C语言面试程序阅读整理 | weijuanran</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">weijuanran</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">smile towards</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weijuanran.cn/C-Language-Interview-Program/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="weijuanran">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="weijuanran">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C语言面试程序阅读整理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-13T10:11:49+08:00">
+                2018-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-Language/" itemprop="url" rel="index">
+                    <span itemprop="name">C Language</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>整理了一些C语言的程序阅读题，主要是程序的对错、程序的输出结果以及解释为什么？</p>
+<h2 id="数组和指针"><a href="#数组和指针" class="headerlink" title="数组和指针"></a>数组和指针</h2><h3 id="数组和指针的存储"><a href="#数组和指针的存储" class="headerlink" title="数组和指针的存储"></a>数组和指针的存储</h3><p>写出下面的输出结果：<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">char str1[] = &quot;abc&quot;;</span><br><span class="line">char str2[] = &quot;abc&quot;;</span><br><span class="line">const char str3[] = &quot;abc&quot;;</span><br><span class="line">const char str4[] = &quot;abc&quot;;</span><br><span class="line">const char *str5 = &quot;abc&quot;;</span><br><span class="line">const char *str6 = &quot;abc&quot;;</span><br><span class="line">char *str7 = &quot;abc&quot;;</span><br><span class="line">char *str8 = &quot;abc&quot;; </span><br><span class="line">cout &lt;&lt; ( str1 == str2 ) &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; ( str3 == str4 ) &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; ( str5 == str6 ) &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; ( str7 == str8 ) &lt;&lt; endl;</span><br></pre></td></tr></table></figure></p>
+<p>结果是：0 0 1 1<br>解答：<font color="#CD0000" size="3">str1,str2,str3,str4是数组变量，它们有各自的内存空间；<br>而str5,str6,str7,str8是指针，它们指向相同的常量区域。</font></p>
+<h3 id="数组和指针的取值"><a href="#数组和指针的取值" class="headerlink" title="数组和指针的取值"></a>数组和指针的取值</h3><p>写出输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void main()</span><br><span class="line">&#123;</span><br><span class="line">int a[5]=&#123;1,2,3,4,5&#125;;</span><br><span class="line">int *ptr=(int *)(&amp;a+1);</span><br><span class="line">printf(&quot;%d,%d&quot;,*(a+1),*(ptr-1));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出：2,5<br>*(a+1）就是a[1]，*(ptr-1)就是a[4],执行结果是2，5</p>
+<p><font color="#CD0000" size="3">注意：&amp;a+1不是首地址+1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int）</font>，int *ptr=(int *)(&amp;a+1);则ptr实际是&amp;(a[5]),也就是a+5。原因如下：<br>&amp;a是数组指针，其类型为 int (*)[5]；而指针加1要根据指针类型加上一定的值，<br>不同类型的指针+1之后增加的大小不同，a是长度为5的int数组指针，所以要加 5*sizeof(int)，所以ptr实际是a[5]；但是prt与(&amp;a+1)类型是不一样的(这点很重要)，所以prt-1只会减去sizeof(int*)；a, &amp;a的地址是一样的，但意思不一样，a是数组首地址，也就是a[0]的地址，&amp;a是对象（数组）首地址，a+1是数组下一元素的地址，即a[1],&amp;a+1是下一个对象的地址，即a[5]。</p>
+<h3 id="数组越界"><a href="#数组越界" class="headerlink" title="数组越界"></a>数组越界</h3><p>下面这个程序执行后会有什么错误？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> #define MAX 255</span><br><span class="line"> int main()</span><br><span class="line">&#123;</span><br><span class="line">   unsigned char A[MAX],i;//i被定义为unsigned char</span><br><span class="line">   for (i=0;i&lt;=MAX;i++)</span><br><span class="line">      A[i]=i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>答：死循环加数组越界访问（<font color="#CD0000" size="3">C/C++不进行数组越界检查</font>）。<br>其一，MAX=255，数组A的下标范围为:0…MAX-1。<br>其二，当i循环到255时,循环内执行:A[255]=255;这句本身没有问题，但是返回for (i=0;i&lt;=MAX;i++)语句时,由于unsigned char的取值范围在(0…255)，i++以后i又为0了，会无限循环下去。</p>
+<h3 id="指针变量存储"><a href="#指针变量存储" class="headerlink" title="指针变量存储"></a>指针变量存储</h3><p>请问以下代码有什么问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int  main()</span><br><span class="line">&#123;</span><br><span class="line">char a;</span><br><span class="line">char *str=&amp;a;</span><br><span class="line">strcpy(str,&quot;hello&quot;);</span><br><span class="line">printf(str);</span><br><span class="line">return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>没有为str分配内存空间，将会发生异常</p>
+<p><font color="#CD0000" size="3">问题出在将一个字符串复制进一个字符变量指针所指地址。</font>虽然可以正确输出结果，但因为越界进行内在读写而导致程序崩溃。</p>
+<h3 id="指针变量的赋值"><a href="#指针变量的赋值" class="headerlink" title="指针变量的赋值"></a>指针变量的赋值</h3><p>以下程序有什么错？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">char* s=&quot;AAA&quot;;</span><br><span class="line">printf(&quot;%s&quot;,s);</span><br><span class="line">s[0]=&apos;B&apos;;</span><br><span class="line">printf(&quot;%s&quot;,s);</span><br></pre></td></tr></table></figure></p>
+<p>“AAA”是字符串常量。s是指针，指向这个字符串常量，所以声明s的时候就有问题。应写成const char* s=”AAA”;<br>然后又因为是常量，所以对是s[0]的赋值操作是不合法的。</p>
+<h3 id="指针计算"><a href="#指针计算" class="headerlink" title="指针计算"></a>指针计算</h3><p>分析以下代码的输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int arr[] = &#123;6,7,8,9,10&#125;;</span><br><span class="line">int *ptr = arr;</span><br><span class="line">*(ptr++)+=123;</span><br><span class="line">printf(“ %d %d ”, *ptr, *(++ptr));</span><br></pre></td></tr></table></figure></p>
+<p>答：输出：8，8<br>对于*(ptr++)+=123;先做加法6+123，然后++，指针指向7；对于printf(“ %d %d ”, <em>ptr, \</em>(++ptr));<font color="#CD0000" size="3">从后往前执行</font>，指针先++，指向8，然后输出8，紧接着再输出8。</p>
+<h3 id="指针存储"><a href="#指针存储" class="headerlink" title="指针存储"></a>指针存储</h3><p>分析下面的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">char *a = &quot;hello&quot;;</span><br><span class="line">char *b = &quot;hello&quot;;</span><br><span class="line">if(a= =b)</span><br><span class="line">printf(&quot;YES&quot;);</span><br><span class="line">else</span><br><span class="line">printf(&quot;NO&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>答：在VC是YES,在C是NO。<br>hello是一个常量字符串，位于静态存储区，它在程序生命期内恒定不变。如果编译器优化的话，会有可能a和b同时指向同一个hello的，则地址相同。如果编译器没有优化，那么就是两个不同的地址，则不同。</p>
+<h3 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h3><p>(void *)ptr 和 (*(void**))ptr的结果是否相同？<br>答：其中ptr为同一个指针，(void *)ptr 和 (*(void**))ptr值是相同的。</p>
+<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><h3 id="sizeof求字节"><a href="#sizeof求字节" class="headerlink" title="sizeof求字节"></a>sizeof求字节</h3><p>某32位系统下,计算sizeof 的值:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">char str[] = “abcde”;</span><br><span class="line">char *p = str ;</span><br><span class="line">int n = 10;</span><br><span class="line">（1）sizeof (str ) = ？ </span><br><span class="line">（2）sizeof ( p ) = ？ </span><br><span class="line">（3）sizeof ( n ) = ？ </span><br><span class="line">void Foo ( char str[100])&#123;</span><br><span class="line">（4）sizeof( str ) = ？ </span><br><span class="line">&#125;</span><br><span class="line">void *p = malloc( 100 );</span><br><span class="line">（5）sizeof ( p ) = ？</span><br></pre></td></tr></table></figure></p>
+<p>答：（1）5 （2）4 （3） 4 （4）4 （5）4</p>
+<h3 id="sizeof求字节-1"><a href="#sizeof求字节-1" class="headerlink" title="sizeof求字节"></a>sizeof求字节</h3><p>给出下面程序的答案<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">typedef struct  AA</span><br><span class="line">&#123;</span><br><span class="line">        int b1:5;</span><br><span class="line">        int b2:2;</span><br><span class="line">&#125;AA;</span><br><span class="line">void main()</span><br><span class="line">&#123;</span><br><span class="line">        AA aa;</span><br><span class="line">        char cc[100];</span><br><span class="line">         strcpy(cc,&quot;0123456789abcdefghijklmnopqrstuvwxyz&quot;);</span><br><span class="line">        memcpy(&amp;aa,cc,sizeof(AA));</span><br><span class="line">        cout &lt;&lt; aa.b1 &lt;&lt;endl;</span><br><span class="line">        cout &lt;&lt; aa.b2 &lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>答：是 -16和１。<br>首先sizeof(AA)的大小为4,b1和b2分别占5bit和2bit，经过strcpy和memcpy后,aa的4个字节所存放的值是:0,1,2,3的ASC码，即00110000,00110001,00110010,00110011；所以，最后一步：显示的是这4个字节的前5位，和之后的2位，分别为：10000和01；因为int是有正负之分，所以：答案是-16和１。</p>
+<h3 id="sizeof用于数组作为函数参数"><a href="#sizeof用于数组作为函数参数" class="headerlink" title="sizeof用于数组作为函数参数"></a>sizeof用于数组作为函数参数</h3><p>以下代码中的两个sizeof用法有问题吗？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void UpperCase( char str[] ) // 将 str 中的小写字母转换成大写字母</span><br><span class="line">&#123;</span><br><span class="line">    for( size_t i=0; i&lt;sizeof(str)/sizeof(str[0]); ++i )</span><br><span class="line">        if( &apos;a&apos;&lt;=str[i] &amp;&amp; str[i]&lt;=&apos;z&apos; )</span><br><span class="line">            str[i] -= (&apos;a&apos;-&apos;A&apos; );</span><br><span class="line">&#125;</span><br><span class="line">char str[] = &quot;aBcDe&quot;;</span><br><span class="line">cout &lt;&lt; &quot;str字符长度为: &quot; &lt;&lt; sizeof(str)/sizeof(str[0]) &lt;&lt; endl;</span><br><span class="line">UpperCase( str );</span><br><span class="line">cout &lt;&lt; str &lt;&lt; endl;</span><br></pre></td></tr></table></figure></p>
+<p>答：函数内的sizeof有问题。根据语法，<font color="#CD0000" size="3">sizeof如用于数组，只能测出静态数组的大小，无法检测动态分配的或外部数组大小</font>。函数外的str是一个静态定义的数组，因此其大小为6，函数内的str实际只是一个指向字符串的指针，没有任何额外的与数组相关的信息，因此只将其当指针看，一个指针为4个字节，因此返回4。</p>
+<h3 id="const的使用"><a href="#const的使用" class="headerlink" title="const的使用"></a>const的使用</h3><p>有以下表达式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int a=248; b=4;</span><br><span class="line">int const c=21;</span><br><span class="line">const int *d=&amp;a;</span><br><span class="line">int *const e=&amp;b;</span><br><span class="line">int const *f const =&amp;a;</span><br></pre></td></tr></table></figure></p>
+<p>请问下列表达式哪些会被编译器禁止？为什么？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*c=32; d=&amp;b; *d=43; e=34; e=&amp;a; f=0x321f;</span><br></pre></td></tr></table></figure></p>
+<p>*c 这是个什么东东，禁止；<br>*d 说了是const，禁止；<br>e = &amp;a 说了是const 禁止；<br>const *f const =&a; 禁止。</p>
+<h3 id="static的使用"><a href="#static的使用" class="headerlink" title="static的使用"></a>static的使用</h3><p>下面的函数实现在一个数上加一个数，有什么错误？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int add_n ( int n )</span><br><span class="line">&#123;</span><br><span class="line">    static int i = 100;</span><br><span class="line">    i += n;</span><br><span class="line">    return i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>答：不应该用static，因为<font color="#CD0000" size="3">static只保留第一次初始化的值，第二次调用时得不到正确的结果</font>。</p>
+<h3 id="static的应用"><a href="#static的应用" class="headerlink" title="static的应用"></a>static的应用</h3><p>写出程序运行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">int sum(int a)</span><br><span class="line">&#123;</span><br><span class="line">auto int c=0;</span><br><span class="line">static int b=3;</span><br><span class="line">c+=1;</span><br><span class="line">b+=2;</span><br><span class="line">return(a+b+c);</span><br><span class="line">&#125;</span><br><span class="line"> void main()</span><br><span class="line">&#123;</span><br><span class="line">int i;</span><br><span class="line">int a=2;</span><br><span class="line">for(i=0;i&lt;5;i++)</span><br><span class="line">&#123;</span><br><span class="line">printf(&quot;%d,&quot;, sum(a));</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>答：输出：8,10,12,14,16,<br>static会保存上次结果，记住这一点 </p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="主函数的返回值"><a href="#主函数的返回值" class="headerlink" title="主函数的返回值"></a>主函数的返回值</h3><p>主函数既然不会被其它函数调用，为什么要返回1？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">   &#123;</span><br><span class="line">    int x=3;</span><br><span class="line">    printf(&quot;%d&quot;,x);</span><br><span class="line">    return 1;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>答：<font color="#CD0000" size="3">main函数的返回值，用于说明程序的退出状态。如果返回0，则代表程序正常退出；返回其它数字的含义则由系统决定</font>。通常，返回非零代表程序异常退出。</p>
+<h3 id="指针用于函数参数"><a href="#指针用于函数参数" class="headerlink" title="指针用于函数参数"></a>指针用于函数参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(1)void GetMemory(char **p, int num)&#123;</span><br><span class="line">*p = (char *)malloc(num);</span><br><span class="line">&#125;</span><br><span class="line">void Test(void)&#123;</span><br><span class="line">char *str = NULL;</span><br><span class="line">GetMemory(&amp;str, 100);</span><br><span class="line">strcpy(str, &quot;hello&quot;);</span><br><span class="line">printf(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>请问运行Test 函数会有什么样的结果？<br>答：输出“hello”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(2)void Test(void)&#123;</span><br><span class="line">char *str = (char *) malloc(100);</span><br><span class="line">strcpy(str, “hello”);</span><br><span class="line">free(str);</span><br><span class="line">if(str != NULL)&#123;</span><br><span class="line">strcpy(str, “world”);</span><br><span class="line">printf(str);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>请问运行Test 函数会有什么样的结果？<br>答：输出“world”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(3)char *GetMemory(void)&#123;</span><br><span class="line">char p[] = &quot;hello world&quot;;</span><br><span class="line">return p;</span><br><span class="line">&#125;</span><br><span class="line">void Test(void)&#123;</span><br><span class="line">char *str = NULL;</span><br><span class="line">str = GetMemory();</span><br><span class="line">printf(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>请问运行Test 函数会有什么样的结果？<br>答：无效的指针，输出不确定</p>
+<h3 id="函数调用先后关系"><a href="#函数调用先后关系" class="headerlink" title="函数调用先后关系"></a>函数调用先后关系</h3><p>写出输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void foo(int m, int n)</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;m=%d, n=%d\n&quot;, m, n);</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int b = 3;</span><br><span class="line">    foo(b+=3, ++b);</span><br><span class="line">    printf(&quot;b=%d\n&quot;, b);</span><br><span class="line">return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>答：输出：m=7,n=4,b=7(VC6.0)<br>这种方式和编译器中的<font color="#CD0000" size="3">函数调用关系相关即先后入栈顺序，不过不同编译器的处理不同</font>。也是因为C标准中对这种方式说明为未定义，所以各个编译器厂商都有自己得理解，所以最后产生得结果完全不同。</p>
+<h3 id="函数地址"><a href="#函数地址" class="headerlink" title="函数地址"></a>函数地址</h3><p>请问一下程序将输出什么结果？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">char *RetMemoy(void)</span><br><span class="line">&#123;</span><br><span class="line">       char p[] = “hello world”;</span><br><span class="line">       return p;</span><br><span class="line">&#125;</span><br><span class="line">void Test(void)</span><br><span class="line">&#123;</span><br><span class="line">       char *str = NULL;</span><br><span class="line">       str = RetMemory();</span><br><span class="line">       printf(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>RetMemoy执行完毕，p资源被回收，指向未知地址。返回地址，str的内容应是不可预测的, 打印的应该是str的地址。</p>
+<h3 id="字符串赋值函数strcpy"><a href="#字符串赋值函数strcpy" class="headerlink" title="字符串赋值函数strcpy"></a>字符串赋值函数strcpy</h3><p>下面的语句会出现什么结果？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char szstr[10];</span><br><span class="line">strcpy (szstr,&quot;0123456789&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>答：长度不一样，会造成非法的OS，应该改为char szstr[11]，<font color="#CD0000" size="3">注意strcpy会拷贝”\0”</font>。</p>
+<h3 id="用strcpy赋值字符串"><a href="#用strcpy赋值字符串" class="headerlink" title="用strcpy赋值字符串"></a>用strcpy赋值字符串</h3><p>对下面程序进行分析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void test2()</span><br><span class="line">&#123;</span><br><span class="line">   char string[10], str1[10];</span><br><span class="line">   int i;</span><br><span class="line">   for(i=0; i&lt;10; i++)</span><br><span class="line">   &#123;</span><br><span class="line">      str1[i] = &apos;a&apos;;</span><br><span class="line">   &#125;</span><br><span class="line">   strcpy( string, str1 );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>答： str1不能在数组内结束:因为str1的存储为：{a,a,a,a,a,a,a,a,a,a},没有’\0’(字符串结束符)，所以不能结束；strcpy( char *s1,char *s2)他的工作原理是，扫描s2指向的内存，逐个字符付到s1所指向的内存，直到碰到’\0’,因为str1结尾没有’\0’，所以具有不确定性。<br>正确应如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">void test2()</span><br><span class="line">&#123;</span><br><span class="line">   char string[10], str1[10];</span><br><span class="line">   int i;</span><br><span class="line">   for(i=0; i&lt;9; i++)</span><br><span class="line">   &#123;</span><br><span class="line">      str1[i] = &apos;a&apos;+i; //把abcdefghi赋值给字符数组</span><br><span class="line">   &#125;</span><br><span class="line">   str[i]=&apos;\0&apos;;//加上结束符</span><br><span class="line">   strcpy( string, str1 );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h2><h3 id="结构体和联合体字节计算"><a href="#结构体和联合体字节计算" class="headerlink" title="结构体和联合体字节计算"></a>结构体和联合体字节计算</h3><p>设有以下说明和定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">typedef union &#123;long i; int k[5]; char c;&#125; DATE;</span><br><span class="line">struct data &#123; int cat; DATE cow; double dog;&#125; too;</span><br><span class="line">DATE max;</span><br></pre></td></tr></table></figure></p>
+<p>则语句 printf(“%d”,sizeof(struct data)+sizeof(max DATE));的执行结果是？<br>结果是：52。<br>DATE是一个union, 变量公用空间，里面最大的变量类型是int[5], 占用20个字节，所以它的大小是20；data是一个struct, 每个变量分开占用空间，依次为int4 + DATE20 + double8 = 32，所以结果是 20 + 32 = 52。<br>当然…在某些16位编辑器下, int可能是2字节,那么结果是 int2 + DATE10 + double8 = 20。</p>
+<h3 id="结构体字节计算"><a href="#结构体字节计算" class="headerlink" title="结构体字节计算"></a>结构体字节计算</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">struct name1&#123;</span><br><span class="line">   char  str;</span><br><span class="line">   short x;</span><br><span class="line">   int   num;</span><br><span class="line">&#125;</span><br><span class="line">struct name2&#123;</span><br><span class="line">   char str;</span><br><span class="line">   int num;</span><br><span class="line">   short x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>sizeof(struct name1),sizeof(struct name2)的结果是多少？<br>答：sizeof(struct name1)=8,sizeof(struct name2)=12<br>在第二个结构中，为保证num按四个字节对齐，char后必须留出3字节的空间；同时为保证整个结构的自然对齐（这里是4字节对齐），在x后还要补齐2个字节，这样就是12字节。</p>
+<h3 id="结构体位域字节计算"><a href="#结构体位域字节计算" class="headerlink" title="结构体位域字节计算"></a>结构体位域字节计算</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">struct s1</span><br><span class="line">&#123;</span><br><span class="line">  int i: 8;</span><br><span class="line">  int j: 4;</span><br><span class="line">  int a: 3;</span><br><span class="line">  double b;</span><br><span class="line">&#125;;</span><br><span class="line"> struct s2</span><br><span class="line">&#123;</span><br><span class="line">  int i: 8;</span><br><span class="line">  int j: 4;</span><br><span class="line">  double b;</span><br><span class="line">  int a:3;</span><br><span class="line">&#125;;</span><br><span class="line">printf(&quot;sizeof(s1)= %d\n&quot;, sizeof(s1));</span><br><span class="line">printf(&quot;sizeof(s2)= %d\n&quot;, sizeof(s2));</span><br></pre></td></tr></table></figure>
+<p>答：输出是: 16, 24<br>对于struct s1，理论上是这样的，首先是i在相对0的位置，占8位一个字节，然后，j就在相对一个字节的位置，由于一个位置的字节数是4位的倍数，因此不用对齐，就放在那里了，然后是a，要在3位的倍数关系的位置上，因此要移一位，在15位的位置上放下，目前总共是18位，折算过来是2字节2位的样子，由于double是8字节的，因此要在相对0要是8个字节的位置上放下，因此从18位开始到8个字节之间的位置被忽略，直接放在8字节的位置了，因此，总共是16字节。<br>对于struct s2，最后会对照是不是结构体内最大数据的倍数，不是的话，会补成是最大数据的倍数。</p>
+<h2 id="动态内存分配"><a href="#动态内存分配" class="headerlink" title="动态内存分配"></a>动态内存分配</h2><h3 id="动态内存分配-1"><a href="#动态内存分配-1" class="headerlink" title="动态内存分配"></a>动态内存分配</h3><p>下面的程序会出现什么结果？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">  void getmemory(char *p)</span><br><span class="line">  &#123;</span><br><span class="line">    p=(char *) malloc(100);</span><br><span class="line">    strcpy(p,&quot;hello world&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  int main( )</span><br><span class="line">  &#123;</span><br><span class="line">    char *str=NULL;</span><br><span class="line">    getmemory(str);</span><br><span class="line">    printf(&quot;%s/n&quot;,str);</span><br><span class="line">    free(str);</span><br><span class="line">    return 0;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>答：程序崩溃，getmemory中的malloc 不能返回动态内存， free（）对str操作很危险。</p>
+<h3 id="动态内存分配-2"><a href="#动态内存分配-2" class="headerlink" title="动态内存分配"></a>动态内存分配</h3><p>下面程序的输出结果是什么？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">void GetMemory(char **p,int num)</span><br><span class="line">&#123;</span><br><span class="line">    *p=(char *)malloc(num);</span><br><span class="line">&#125;       </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    char *str=NULL;</span><br><span class="line">    GetMemory(&amp;str,100);</span><br><span class="line">    strcpy(str,&quot;hello&quot;);</span><br><span class="line">    free(str);</span><br><span class="line">    if(str!=NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        strcpy(str,&quot;world&quot;);</span><br><span class="line">    &#125;   </span><br><span class="line">    printf(&quot;\n str is %s&quot;,str);</span><br><span class="line">    getchar();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>答：输出str is world。<br>free 只是释放的str指向的内存空间,它本身的值还是存在的。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="无符号类型整数自动转换"><a href="#无符号类型整数自动转换" class="headerlink" title="无符号类型整数自动转换"></a>无符号类型整数自动转换</h3><p>下面的代码输出是什么，为什么？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void foo(void)</span><br><span class="line">&#123;</span><br><span class="line">    unsigned int a = 6;</span><br><span class="line">    int b = -20;</span><br><span class="line">    (a+b &gt; 6) ? puts(&quot;&gt; 6&quot;) : puts(&quot;&lt;= 6&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个问题测试你是否懂得C语言中的整数自动转换原则，我发现有些开发者懂得极少这些东西。不管如何，这无符号整型问题的答案是输出是 “&gt;6”。原因是<font color="#CD0000" size="3">当表达式中存在有符号类型和无符号类型时所有的操作数都自动转换为无符号类型</font>。因此-20变成了一个非常大的正整数，所以该表达式计算出的结果大于6。</p>
+<h3 id="表达式是否合理"><a href="#表达式是否合理" class="headerlink" title="表达式是否合理"></a>表达式是否合理</h3><p>下面的结构是合法的吗？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int a = 5, b = 7, c;</span><br><span class="line">c = a+++b;</span><br></pre></td></tr></table></figure></p>
+<p>上面的例子是完全合乎语法的。根据最处理原则，编译器应当能处理尽可能所有合法的用法。因此，上面的代码被处理成：c = a++ + b;<br>因此, 这段代码持行后a = 6, b = 7, c = 12。</p>
+<h3 id="自增运算"><a href="#自增运算" class="headerlink" title="自增运算"></a>自增运算</h3><p>请写出下列代码的输出内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">int a,b,c,d;</span><br><span class="line">a=10;</span><br><span class="line">b=a++;</span><br><span class="line">c=++a;</span><br><span class="line">d=10*a++;</span><br><span class="line">printf(&quot;b，c，d：%d，%d，%d&quot;，b，c，d）;</span><br><span class="line">return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>答：10，12，120</p>
+<h3 id="自增运算-1"><a href="#自增运算-1" class="headerlink" title="自增运算"></a>自增运算</h3><p>写出表达式计算 a的值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int a = 4;</span><br><span class="line">a += (a++); </span><br><span class="line">a += (++a) ;</span><br><span class="line">(++a) += a;</span><br><span class="line">(++a) += (a++);</span><br></pre></td></tr></table></figure></p>
+<p>答：依次为9,10,10,11</p>
+<h3 id="循环嵌套"><a href="#循环嵌套" class="headerlink" title="循环嵌套"></a>循环嵌套</h3><p>请问下面程序有什么错误?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int a[60][250][1000],i,j,k;</span><br><span class="line">for(k=0;k&lt;=1000;k++)</span><br><span class="line"> for(j=0;j&lt;250;j++)</span><br><span class="line">  for(i=0;i&lt;60;i++)</span><br><span class="line">   a[i][j][k]=0;</span><br></pre></td></tr></table></figure></p>
+<p>答案：把循环语句内外换一下</p>
+<h3 id="死循环"><a href="#死循环" class="headerlink" title="死循环"></a>死循环</h3><p>请问下面程序会出现什么情况?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#define Max_CB 500</span><br><span class="line">void LmiQueryCSmd(Struct MSgCB * pmsg)</span><br><span class="line">&#123;</span><br><span class="line">     unsigned char ucCmdNum;</span><br><span class="line">     ......</span><br><span class="line">      for(ucCmdNum=0;ucCmdNum&lt;Max_CB;ucCmdNum++)</span><br><span class="line">      &#123;</span><br><span class="line">      ......;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>答案：死循环</p>
+<h3 id="绝对地址赋值"><a href="#绝对地址赋值" class="headerlink" title="绝对地址赋值"></a>绝对地址赋值</h3><p>对绝对地址0x100000赋值且想让程序跳转到绝对地址是0x100000去执行：<br>(unsigned int*)0x100000 = 1234;<br>首先要将0x100000强制转换成函数指针,即:<br>(void (*)())0x100000<br>然后再调用它:<br>*((void (*)())0x100000)();<br>用typedef可以看得更直观些:<br>typedef void(*)() voidFuncPtr;<br>*((voidFuncPtr)0x100000)();</p>
+<h3 id="二进制转换"><a href="#二进制转换" class="headerlink" title="二进制转换"></a>二进制转换</h3><p>下列代码的输出值为多少？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">unsigned short A = 10;</span><br><span class="line">printf(&quot;~A = %u\n&quot;, ~A);</span><br><span class="line">char c=128;</span><br><span class="line">printf(&quot;c=%d\n&quot;,c);</span><br></pre></td></tr></table></figure></p>
+<p> 答：～A ＝0xfffffff5,int值 为－11，但输出的是uint。所以输出4294967285；<br>c＝0x10,输出的是int，最高位为1，是负数，所以它的值就是0x00的补码就是128，所以输出－128。<br>这两道题都是在考察二进制向int或uint转换时的最高位处理。</p>
+<h3 id="交换两个变量的值，不使用第三个变量。"><a href="#交换两个变量的值，不使用第三个变量。" class="headerlink" title="交换两个变量的值，不使用第三个变量。"></a>交换两个变量的值，不使用第三个变量。</h3><p>即a=3,b=5,交换之后a=5,b=3;<br>有两种解法, 一种用算术算法, 一种用^(异或)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = a + b;</span><br><span class="line">b = a - b;</span><br><span class="line">a = a - b;</span><br><span class="line">or</span><br><span class="line">a = a^b;// 只能对int,char..</span><br><span class="line">b = a^b;</span><br><span class="line">a = a^b;</span><br><span class="line">or</span><br><span class="line">a ^= b ^= a;</span><br></pre></td></tr></table></figure></p>
+<h3 id="用宏定义写出swap（x，y）"><a href="#用宏定义写出swap（x，y）" class="headerlink" title="用宏定义写出swap（x，y）"></a>用宏定义写出swap（x，y）</h3><p>#define swap(x, y)/<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = x + y;/</span><br><span class="line">y = x - y;/</span><br><span class="line">x = x - y;</span><br></pre></td></tr></table></figure></p>
+<h3 id="一句代码实现x是否为2的若干次幂的判断"><a href="#一句代码实现x是否为2的若干次幂的判断" class="headerlink" title="一句代码实现x是否为2的若干次幂的判断"></a>一句代码实现x是否为2的若干次幂的判断</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int i = 512;</span><br><span class="line">cout &lt;&lt; boolalpha &lt;&lt; ((i &amp; (i - 1)) ? false : true) &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+    
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------The end--Thanks for your reading!-------------</div>
+    
+</div>
+    
+    </div>
+
+    
+
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>title:</span>C语言面试程序阅读整理</p>
+  <p><span>author:</span>weijuanran</p>
+  <p><span>pubtime:</span>2018/05/13 - 10:05</p>
+  <p><span>update:</span>2018/05/13 - 15:05</p>
+  <p><span>original:</span><a href="/C-Language-Interview-Program/" title="C语言面试程序阅读整理">http://weijuanran.cn/C-Language-Interview-Program/</a>
+    <span class="copy-path"  title="click to copy"><i class="fa fa-clipboard" data-clipboard-text="http://weijuanran.cn/C-Language-Interview-Program/"  aria-label="success！"></i></span>
+  </p>
+  <p><span>agree:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">Attribution-NonCommercial-NoDerivatives 4.0 International</a></p>  
+  <p><span></span> Reprinted please keep the original link and author.</p>
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: 'success',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i>C</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/C-Language-Interview-Knowldege/" rel="next" title="C语言面试基础知识整理">
+                <i class="fa fa-chevron-left"></i> C语言面试基础知识整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="weijuanran" />
+            
+              <p class="site-author-name" itemprop="name">weijuanran</p>
+              <p class="site-description motion-element" itemprop="description">high infinity</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/weijuanran" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:weijuanran@163.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/3515135337" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=31654479&auto=0&height=32"></iframe>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组和指针"><span class="nav-number">1.</span> <span class="nav-text">数组和指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组和指针的存储"><span class="nav-number">1.1.</span> <span class="nav-text">数组和指针的存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组和指针的取值"><span class="nav-number">1.2.</span> <span class="nav-text">数组和指针的取值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组越界"><span class="nav-number">1.3.</span> <span class="nav-text">数组越界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针变量存储"><span class="nav-number">1.4.</span> <span class="nav-text">指针变量存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针变量的赋值"><span class="nav-number">1.5.</span> <span class="nav-text">指针变量的赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针计算"><span class="nav-number">1.6.</span> <span class="nav-text">指针计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针存储"><span class="nav-number">1.7.</span> <span class="nav-text">指针存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空指针"><span class="nav-number">1.8.</span> <span class="nav-text">空指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键字"><span class="nav-number">2.</span> <span class="nav-text">关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sizeof求字节"><span class="nav-number">2.1.</span> <span class="nav-text">sizeof求字节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sizeof求字节-1"><span class="nav-number">2.2.</span> <span class="nav-text">sizeof求字节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sizeof用于数组作为函数参数"><span class="nav-number">2.3.</span> <span class="nav-text">sizeof用于数组作为函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const的使用"><span class="nav-number">2.4.</span> <span class="nav-text">const的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static的使用"><span class="nav-number">2.5.</span> <span class="nav-text">static的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static的应用"><span class="nav-number">2.6.</span> <span class="nav-text">static的应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">3.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主函数的返回值"><span class="nav-number">3.1.</span> <span class="nav-text">主函数的返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针用于函数参数"><span class="nav-number">3.2.</span> <span class="nav-text">指针用于函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数调用先后关系"><span class="nav-number">3.3.</span> <span class="nav-text">函数调用先后关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数地址"><span class="nav-number">3.4.</span> <span class="nav-text">函数地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串赋值函数strcpy"><span class="nav-number">3.5.</span> <span class="nav-text">字符串赋值函数strcpy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用strcpy赋值字符串"><span class="nav-number">3.6.</span> <span class="nav-text">用strcpy赋值字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构体"><span class="nav-number">4.</span> <span class="nav-text">结构体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体和联合体字节计算"><span class="nav-number">4.1.</span> <span class="nav-text">结构体和联合体字节计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体字节计算"><span class="nav-number">4.2.</span> <span class="nav-text">结构体字节计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体位域字节计算"><span class="nav-number">4.3.</span> <span class="nav-text">结构体位域字节计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态内存分配"><span class="nav-number">5.</span> <span class="nav-text">动态内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态内存分配-1"><span class="nav-number">5.1.</span> <span class="nav-text">动态内存分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态内存分配-2"><span class="nav-number">5.2.</span> <span class="nav-text">动态内存分配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">6.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无符号类型整数自动转换"><span class="nav-number">6.1.</span> <span class="nav-text">无符号类型整数自动转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表达式是否合理"><span class="nav-number">6.2.</span> <span class="nav-text">表达式是否合理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自增运算"><span class="nav-number">6.3.</span> <span class="nav-text">自增运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自增运算-1"><span class="nav-number">6.4.</span> <span class="nav-text">自增运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环嵌套"><span class="nav-number">6.5.</span> <span class="nav-text">循环嵌套</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死循环"><span class="nav-number">6.6.</span> <span class="nav-text">死循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绝对地址赋值"><span class="nav-number">6.7.</span> <span class="nav-text">绝对地址赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二进制转换"><span class="nav-number">6.8.</span> <span class="nav-text">二进制转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交换两个变量的值，不使用第三个变量。"><span class="nav-number">6.9.</span> <span class="nav-text">交换两个变量的值，不使用第三个变量。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用宏定义写出swap（x，y）"><span class="nav-number">6.10.</span> <span class="nav-text">用宏定义写出swap（x，y）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一句代码实现x是否为2的若干次幂的判断"><span class="nav-number">6.11.</span> <span class="nav-text">一句代码实现x是否为2的若干次幂的判断</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">weijuanran</span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  visitors:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v="></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v="></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v="></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v="></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v="></script>
+<script type="text/javascript" src="/js/src/post-details.js?v="></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v="></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+<script type="text/javascript" src="/js/src/star.js"></script>
+</html>

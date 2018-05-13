@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="预处理什么是预编译？何时需要预编译？（1）预编译又称预处理，是做些代码文本的替换工作，即程序执行前的一些预处理工作。主要处理#开头的指令，如拷贝#include包含的文件代码、替换#define定义的宏、条件编译#if等。（2）何时需要预编译：a.总是使用不经常改动的大型代码体；b.程序由多个模块组成，所有模块都使用一">
+<meta name="description" content="整理了一些C语言面试中的基础知识，包括预处理阶段、主要关键字的用法、局部变量和全局变量、结构体与联合体、数据类型和函数、内存分配回收等。 预处理什么是预编译？何时需要预编译？（1）预编译又称预处理，是做些代码文本的替换工作，即程序执行前的一些预处理工作。主要处理#开头的指令，如拷贝#include包含的文件代码、替换#">
 <meta name="keywords" content="C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言面试基础知识整理">
 <meta property="og:url" content="http://weijuanran.cn/C-Language-Interview-Knowldege/index.html">
 <meta property="og:site_name" content="weijuanran">
-<meta property="og:description" content="预处理什么是预编译？何时需要预编译？（1）预编译又称预处理，是做些代码文本的替换工作，即程序执行前的一些预处理工作。主要处理#开头的指令，如拷贝#include包含的文件代码、替换#define定义的宏、条件编译#if等。（2）何时需要预编译：a.总是使用不经常改动的大型代码体；b.程序由多个模块组成，所有模块都使用一组标准的包含文件和相同的编译选项。在这种情况下，可以将所有包含文件预编译为一个预">
+<meta property="og:description" content="整理了一些C语言面试中的基础知识，包括预处理阶段、主要关键字的用法、局部变量和全局变量、结构体与联合体、数据类型和函数、内存分配回收等。 预处理什么是预编译？何时需要预编译？（1）预编译又称预处理，是做些代码文本的替换工作，即程序执行前的一些预处理工作。主要处理#开头的指令，如拷贝#include包含的文件代码、替换#define定义的宏、条件编译#if等。（2）何时需要预编译：">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-12T14:53:17.407Z">
+<meta property="og:updated_time" content="2018-05-13T07:53:21.746Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言面试基础知识整理">
-<meta name="twitter:description" content="预处理什么是预编译？何时需要预编译？（1）预编译又称预处理，是做些代码文本的替换工作，即程序执行前的一些预处理工作。主要处理#开头的指令，如拷贝#include包含的文件代码、替换#define定义的宏、条件编译#if等。（2）何时需要预编译：a.总是使用不经常改动的大型代码体；b.程序由多个模块组成，所有模块都使用一组标准的包含文件和相同的编译选项。在这种情况下，可以将所有包含文件预编译为一个预">
+<meta name="twitter:description" content="整理了一些C语言面试中的基础知识，包括预处理阶段、主要关键字的用法、局部变量和全局变量、结构体与联合体、数据类型和函数、内存分配回收等。 预处理什么是预编译？何时需要预编译？（1）预编译又称预处理，是做些代码文本的替换工作，即程序执行前的一些预处理工作。主要处理#开头的指令，如拷贝#include包含的文件代码、替换#define定义的宏、条件编译#if等。（2）何时需要预编译：">
 
 
 
@@ -358,7 +358,8 @@
       
 
       
-        <h2 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h2><h3 id="什么是预编译？何时需要预编译？"><a href="#什么是预编译？何时需要预编译？" class="headerlink" title="什么是预编译？何时需要预编译？"></a>什么是预编译？何时需要预编译？</h3><p>（1）预编译又称预处理，是做些代码文本的替换工作，即程序执行前的一些预处理工作。<font color="#CD0000" size="3">主要处理#开头的指令，如拷贝#include包含的文件代码、替换#define定义的宏、条件编译#if等</font>。<br>（2）何时需要预编译：<br>a.总是使用不经常改动的大型代码体；<br>b.程序由多个模块组成，所有模块都使用一组标准的包含文件和相同的编译选项。在这种情况下，可以将所有包含文件预编译为一个预编译头。<br><a id="more"></a></p>
+        <p>整理了一些C语言面试中的基础知识，包括预处理阶段、主要关键字的用法、局部变量和全局变量、结构体与联合体、数据类型和函数、内存分配回收等。</p>
+<h2 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h2><h3 id="什么是预编译？何时需要预编译？"><a href="#什么是预编译？何时需要预编译？" class="headerlink" title="什么是预编译？何时需要预编译？"></a>什么是预编译？何时需要预编译？</h3><p>（1）预编译又称预处理，是做些代码文本的替换工作，即程序执行前的一些预处理工作。<font color="#CD0000" size="3">主要处理#开头的指令，如拷贝#include包含的文件代码、替换#define定义的宏、条件编译#if等</font>。<br>（2）何时需要预编译：<br><a id="more"></a><br>a.总是使用不经常改动的大型代码体；<br>b.程序由多个模块组成，所有模块都使用一组标准的包含文件和相同的编译选项。在这种情况下，可以将所有包含文件预编译为一个预编译头。</p>
 <h3 id="写一个“标准”宏，这个宏输入两个参数并返回较小的一个"><a href="#写一个“标准”宏，这个宏输入两个参数并返回较小的一个" class="headerlink" title="写一个“标准”宏，这个宏输入两个参数并返回较小的一个"></a>写一个“标准”宏，这个宏输入两个参数并返回较小的一个</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define MIN(x, y) ((x)&lt;(y)?(x):(y))  //注意结尾没有;</span><br></pre></td></tr></table></figure>
 <h3 id="与-的作用？"><a href="#与-的作用？" class="headerlink" title="#与##的作用？"></a>#与##的作用？</h3><p><font color="#CD0000" size="3">#是把宏参数转化为字符串的运算符，##是把两个宏参数连接的运算符。</font><br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#define STR(arg) #arg          //则宏STR(hello)展开时为”hello”</span><br><span class="line">#define NAME(y) name_y      //则宏NAME(1)展开时仍为name_y</span><br><span class="line">#define NAME(y) name_##y    //则宏NAME(1)展开为name_1</span><br><span class="line">#define DECLARE(name, type) typename##_##type##_type，</span><br><span class="line">//则宏DECLARE(val, int)展开为int val_int_type</span><br></pre></td></tr></table></figure></p>
 <h3 id="如何避免头文件被重复包含？"><a href="#如何避免头文件被重复包含？" class="headerlink" title="如何避免头文件被重复包含？"></a>如何避免头文件被重复包含？</h3><p>例如，为避免头文件my_head.h被重复包含，可在其中<font color="#CD0000" size="3">使用条件编译</font>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#ifndef _MY_HEAD_H</span><br><span class="line">#define _MY_HEAD_H    /*空宏*/</span><br><span class="line">/*其他语句*/</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure></p>
@@ -429,7 +430,7 @@
 <h3 id="system-“pause”-的作用？"><a href="#system-“pause”-的作用？" class="headerlink" title="system(“pause”);的作用？"></a>system(“pause”);的作用？</h3><p>系统的暂停程序，按任意键继续，屏幕会打印，”按任意键继续。。。。。”省去了使用getchar（）；</p>
 <h3 id="C-的类和C里面的struct有什么区别？"><a href="#C-的类和C里面的struct有什么区别？" class="headerlink" title="C++的类和C里面的struct有什么区别？"></a>C++的类和C里面的struct有什么区别？</h3><p>C++中的类具有成员保护功能，并且具有继承，多态这类OO特点，而C里的struct没有。C里面的struct没有成员函数,不能继承,派生等等。</p>
 <h3 id="动态连接库的两种方式"><a href="#动态连接库的两种方式" class="headerlink" title="动态连接库的两种方式?"></a>动态连接库的两种方式?</h3><p>（1）<font color="#CD0000" size="3">载入时动态链接</font>（load-time dynamic linking），模块非常明确调用某个导出函数，使得他们就像本地函数一样。这需要链接时链接那些函数所在DLL的导入库，导入库向系统提供了载入DLL时所需的信息及DLL函数定位。<br>（2）<font color="#CD0000" size="3">运行时动态链接</font>（run-time dynamic linking），运行时可以通过LoadLibrary或LoadLibraryEx函数载入DLL。DLL载入后，模块可以通过调用GetProcAddress获取DLL函数的出口地址，然后就可以通过返回的函数指针调用DLL函数了。如此即可避免导入库文件了。</p>
-<h3 id="程序什么时候应该使用多线程？"><a href="#程序什么时候应该使用多线程？" class="headerlink" title="程序什么时候应该使用多线程？"></a>程序什么时候应该使用多线程？</h3><p>（1）<font color="#CD0000" size="3">耗时的操作</font>使用线程，提高应用程序响应<br>（2）<font color="#CD0000" size="3">并行操作</font>时使用线程，如C/S架构的服务器端并发线程响应用户的请求。<br>（3）<font color="#CD0000" size="3">多CPU系统中<font>，使用线程提高CPU利用率<br>（4）<font color="#CD0000" size="3">改善程序结构</font>。一个既长又复杂的进程可以考虑分为多个线程，成为几个独立或半独立的运行部分，这样的程序会利于理解和修改。<br>其他情况都使用单线程。</font></font></p>
+<h3 id="程序什么时候应该使用多线程？"><a href="#程序什么时候应该使用多线程？" class="headerlink" title="程序什么时候应该使用多线程？"></a>程序什么时候应该使用多线程？</h3><p>（1）<font color="#CD0000" size="3">耗时的操作</font>使用线程，提高应用程序响应<br>（2）<font color="#CD0000" size="3">并行操作</font>时使用线程，如C/S架构的服务器端并发线程响应用户的请求。<br>（3）<font color="#CD0000" size="3">多CPU系统中</font>，使用线程提高CPU利用率<br>（4）<font color="#CD0000" size="3">改善程序结构</font>。一个既长又复杂的进程可以考虑分为多个线程，成为几个独立或半独立的运行部分，这样的程序会利于理解和修改。<br>其他情况都使用单线程。</p>
 <h3 id="多进程与多线程的区别？"><a href="#多进程与多线程的区别？" class="headerlink" title="多进程与多线程的区别？"></a>多进程与多线程的区别？</h3><p>（1）进程：子进程是父进程的复制品。子进程获得父进程数据空间、堆和栈的复制品。<br>（2）线程：相对与进程而言，线程是一个更加接近与执行体的概念，它可以与同进程的其他线程共享数据，但拥有自己的栈空间，拥有独立的执行序列。<br>（3）两者都可以提高程序的并发度，提高程序运行效率和响应时间。<br>（4）线程和进程在使用上各有优缺点：线程执行开销小，但不利于资源管理和保护；而进程相反。同时，线程适合于在SMP机器上运行，而进程则可以跨机器迁移。</p>
 <h3 id="用变量a给出下面的定义"><a href="#用变量a给出下面的定义" class="headerlink" title="用变量a给出下面的定义"></a>用变量a给出下面的定义</h3><p>a) 一个整型数（An integer）<br>b) 一个指向整型数的指针（A pointer to an integer）<br>c) 一个指向指针的的指针，它指向的指针是指向一个整型数（A pointer to a pointer to an integer）<br>d) 一个有10个整型数的数组（An array of 10 integers）<br>e) 一个有10个指针的数组，该指针是指向一个整型数的（An array of 10 pointers to integers）<br>f) 一个指向有10个整型数数组的指针（A pointer to an array of 10 integers）<br>g) 一个指向函数的指针，该函数有一个整型参数并返回一个整型数（A pointer to a function that takes an integer as an argument and returns an integer）<br>h) 一个有10个指针的数组，该指针指向一个函数，该函数有一个整型参数并返回一个整型数（ An array of ten pointers to functions that take an integer<br>argument and return an integer ）<br>答案是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a) int a; // An integer</span><br><span class="line">b) int *a; // A pointer to an integer</span><br><span class="line">c) int **a; // A pointer to a pointer to an integer</span><br><span class="line">d) int a[10]; // An array of 10 integers</span><br><span class="line">e) int *a[10]; // An array of 10 pointers to integers</span><br><span class="line">f) int (*a)[10]; // A pointer to an array of 10 integers</span><br><span class="line">g) int (*a)(int); // A pointer to a function a that takes an integer argument and returns an integer</span><br><span class="line">h) int (*a[10])(int); // An array of 10 pointers to functions that take an integer argument and return an integer</span><br></pre></td></tr></table></figure></p>
 
@@ -464,7 +465,7 @@
   <p><span>title:</span>C语言面试基础知识整理</p>
   <p><span>author:</span>weijuanran</p>
   <p><span>pubtime:</span>2018/05/12 - 20:05</p>
-  <p><span>update:</span>2018/05/12 - 22:05</p>
+  <p><span>update:</span>2018/05/13 - 15:05</p>
   <p><span>original:</span><a href="/C-Language-Interview-Knowldege/" title="C语言面试基础知识整理">http://weijuanran.cn/C-Language-Interview-Knowldege/</a>
     <span class="copy-path"  title="click to copy"><i class="fa fa-clipboard" data-clipboard-text="http://weijuanran.cn/C-Language-Interview-Knowldege/"  aria-label="success！"></i></span>
   </p>
@@ -519,6 +520,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/C-Language-Interview-Program/" rel="prev" title="C语言面试程序阅读整理">
+                C语言面试程序阅读整理 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -625,7 +630,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
