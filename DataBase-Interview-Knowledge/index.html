@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg?v=">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DataBase," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="整理了一些数据库面试中的基础知识，包括存储过程、索引、触发器、事务、锁、视图、游标、主键、外键、约束、范式、表连接以及Oracle相关的基础知识点。 存储过程什么是存储过程存储过程是一个预编译的SQL语句；是由SQL语句组成的代码块，允许模块化的设计；只需创建一次，以后在该程序中就可以调用多次。如果某次操作需要执行多次">
+<meta name="keywords" content="DataBase">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库面试基础知识整理">
+<meta property="og:url" content="http://weijuanran.cn/DataBase-Interview-Knowledge/index.html">
+<meta property="og:site_name" content="weijuanran">
+<meta property="og:description" content="整理了一些数据库面试中的基础知识，包括存储过程、索引、触发器、事务、锁、视图、游标、主键、外键、约束、范式、表连接以及Oracle相关的基础知识点。 存储过程什么是存储过程存储过程是一个预编译的SQL语句；是由SQL语句组成的代码块，允许模块化的设计；只需创建一次，以后在该程序中就可以调用多次。如果某次操作需要执行多次SQL，使用存储过程比单纯SQL语句执行要快。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-05-15T09:49:20.835Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库面试基础知识整理">
+<meta name="twitter:description" content="整理了一些数据库面试中的基础知识，包括存储过程、索引、触发器、事务、锁、视图、游标、主键、外键、约束、范式、表连接以及Oracle相关的基础知识点。 存储过程什么是存储过程存储过程是一个预编译的SQL语句；是由SQL语句组成的代码块，允许模块化的设计；只需创建一次，以后在该程序中就可以调用多次。如果某次操作需要执行多次SQL，使用存储过程比单纯SQL语句执行要快。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://weijuanran.cn/DataBase-Interview-Knowledge/"/>
+
+
+
+
+
+  <title>数据库面试基础知识整理 | weijuanran</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">weijuanran</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">smile towards</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weijuanran.cn/DataBase-Interview-Knowledge/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="weijuanran">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="weijuanran">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据库面试基础知识整理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-15T17:06:03+08:00">
+                2018-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DataBase/" itemprop="url" rel="index">
+                    <span itemprop="name">DataBase</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>整理了一些数据库面试中的基础知识，包括存储过程、索引、触发器、事务、锁、视图、游标、主键、外键、约束、范式、表连接以及Oracle相关的基础知识点。</p>
+<h2 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h2><h3 id="什么是存储过程"><a href="#什么是存储过程" class="headerlink" title="什么是存储过程"></a>什么是存储过程</h3><p><font color="#CD0000" size="3">存储过程是一个预编译的SQL语句</font>；是由SQL语句组成的代码块，允许模块化的设计；<font color="#CD0000" size="3">只需创建一次，以后在该程序中就可以调用多次</font>。如果某次操作需要执行多次SQL，使用存储过程比单纯SQL语句执行要快。<br><a id="more"></a></p>
+<h3 id="存储过程的调用"><a href="#存储过程的调用" class="headerlink" title="存储过程的调用"></a>存储过程的调用</h3><p>（1）可以用一个命令对象来调用存储过程；<br>（2）可以供外部程序调用，比如：java程序。</p>
+<h3 id="存储过程的优缺点"><a href="#存储过程的优缺点" class="headerlink" title="存储过程的优缺点"></a>存储过程的优缺点</h3><p>优点：<br>（1）存储过程是预编译过的，<font color="#CD0000" size="3">执行效率高</font>；<br>（2）存储过程的代码直接存放于数据库中，<font color="#CD0000" size="3">通过存储过程名直接调用</font>，减少网络通讯；<br>（3）<font color="#CD0000" size="3">安全性高</font>，执行存储过程需要有一定权限的用户；<br>（4）存储过程可以<font color="#CD0000" size="3">重复使用</font>，可减少数据库开发人员的工作量。<br> 缺点：移植性差</p>
+<h3 id="存储过程与函数的区别"><a href="#存储过程与函数的区别" class="headerlink" title="存储过程与函数的区别"></a>存储过程与函数的区别</h3><p>（1）存储过程用于在数据库中完成特定的操作或者任务（如插入、删除等）；函数用于特定的数据（如选择）；<br>（2）存储过程程序头部声明用procedure；函数程序头部声明用function；<br>（3）存储过程程序头部声明时不需描述返回类型；    函数程序头部声明时要描述返回类型，而且PL/SQL块中至少要包括一个有效的return语句；<br>（4）存储过程可作为一个独立的PL/SQL语句来执行；函数不能独立执行，必须作为表达式的一部分调用；<br>（5）都可以使用in/out/in out 三种模式的参数；存储过程可以通过out/in out 返回零个或多个值；函数通过return语句返回一个值，且该值要与声明部分一致，也可以是通过out类型的参数带出的变量；<br>（6）SQL语句(DML 或SELECT)中不可调用存储过程；SQL语句(DML 或SELECT)中可以调用函数。</p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="什么是索引"><a href="#什么是索引" class="headerlink" title="什么是索引"></a>什么是索引</h3><p>（1）<font color="#CD0000" size="3">索引就一种特殊的查询表，数据库的搜索可以利用它加速对数据的检索</font>。<br>（2）索引是对数据库表中一或多个列的值进行排序的结构，是帮助MySQL高效获取数据的数据结构；</p>
+<h3 id="索引的作用"><a href="#索引的作用" class="headerlink" title="索引的作用"></a>索引的作用</h3><p>它很类似与现实生活中书的目录，不需要查询整本书内容就可以找到想要的数据。</p>
+<h3 id="索引的优缺点"><a href="#索引的优缺点" class="headerlink" title="索引的优缺点"></a>索引的优缺点</h3><p>优点：<br>（1）<font color="#CD0000" size="3">加快数据库的检索速度</font>；<br>（2）<font color="#CD0000" size="3">降低了插入、删除、修改等维护任务的速度</font>；<br>（3）<font color="#CD0000" size="3">唯一索引可以确保每一行数据的唯一性</font>；<br>（4）通过使用索引，可以在查询的过程中使用优化隐藏器，<font color="#CD0000" size="3">提高系统的性能</font>。<br>缺点：</p>
+<p><font color="#CD0000" size="3">索引需要占物理和数据空间</font>，即减慢了数据录入的速度，同时也增加了数据库的尺寸大小。</p>
+<h3 id="什么样的字段适合建索引？"><a href="#什么样的字段适合建索引？" class="headerlink" title="什么样的字段适合建索引？"></a>什么样的字段适合建索引？</h3><p><font color="#CD0000" size="3">唯一、不为空、经常被查询的字段</font>。</p>
+<h3 id="什么情况下用或不用索引？"><a href="#什么情况下用或不用索引？" class="headerlink" title="什么情况下用或不用索引？"></a>什么情况下用或不用索引？</h3><p>如果一张表更多是用于查询而很少插入，那么就可以建立尽量多的索引以优化查询性能。相反如果一张表要经常插入或更新，则尽可能少用索引，有时甚至连主键都不建。</p>
+<h3 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h3><p>MySQL中基本的索引类型：<font color="#CD0000" size="3">普通索引、唯一索引、主键索引、全文索引</font>。<br>其他分类：<br>（1）逻辑上：<br>Single column 单行索引<br>Concatenated 多行索引<br>Unique 唯一索引<br>NonUnique 非唯一索引<br>Function-based 函数索引<br>Domain 域索引<br>（2）物理上：<br>Partitioned 分区索引<br>NonPartitioned 非分区索引<br>（3）B-tree ：<br>Normal 正常型B树<br>Rever Key 反转型B树<br>Bitmap 位图索引</p>
+<h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><h3 id="什么是触发器？"><a href="#什么是触发器？" class="headerlink" title="什么是触发器？"></a>什么是触发器？</h3><p><font color="#CD0000" size="3">触发器是一种特殊的存储过程，主要是通过事件来触发而被执行的</font>。</p>
+<h3 id="触发器的作用？"><a href="#触发器的作用？" class="headerlink" title="触发器的作用？"></a>触发器的作用？</h3><p>（1）可以强化约束，来维护数据的完整性和一致性；可以跟踪数据库内的操作，从而不允许未经许可的更新和变化。<br>（2）可以联级运算。如，某表上的触发器上包含对另一个表的数据操作，而该操作又会导致该表触发器被触发。</p>
+<h3 id="触发器分类"><a href="#触发器分类" class="headerlink" title="触发器分类"></a>触发器分类</h3><p>触发时间：有before,after.<br>触发事件：有insert,update,delete三种<br>触发类型：有行触发、语句触发</p>
+<h2 id="事务和锁"><a href="#事务和锁" class="headerlink" title="事务和锁"></a>事务和锁</h2><h3 id="什么是事务？"><a href="#什么是事务？" class="headerlink" title="什么是事务？"></a>什么是事务？</h3><p><font color="#CD0000" size="3">事务（Transaction）是并发控制的基本单位</font>。它是一个操作序列，<font color="#CD0000" size="3">这些操作要么都执行，要么都不执行</font>，它是一个不可分割的工作单位。事务是数据库维护数据一致性的单位，在每个事务结束时，都能保持数据一致性。</p>
+<h3 id="事务的四大特性"><a href="#事务的四大特性" class="headerlink" title="事务的四大特性"></a>事务的四大特性</h3><p><font color="#CD0000" size="3">一致性、原子性、隔离性、持久性</font>。</p>
+<h3 id="事务的三个常用命令"><a href="#事务的三个常用命令" class="headerlink" title="事务的三个常用命令"></a>事务的三个常用命令</h3><p>Begin Transaction、Commit Transaction、RollBack Transaction。</p>
+<h3 id="什么是锁？"><a href="#什么是锁？" class="headerlink" title="什么是锁？"></a>什么是锁？</h3><p>锁：在DBMS中，锁是实现事务的关键，<font color="#CD0000" size="3">锁可以保证事务的完整性和并发性</font>。与现实生活中锁一样，它可以使某些数据的拥有者，在某段时间内不能使用某些数据或数据结构。</p>
+<h3 id="乐观锁和悲观锁"><a href="#乐观锁和悲观锁" class="headerlink" title="乐观锁和悲观锁"></a>乐观锁和悲观锁</h3><p>乐观并发控制(乐观锁)和悲观并发控制（悲观锁）是并发控制主要采用的技术手段。<br>悲观锁：假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作。<br>乐观锁：假设不会发生并发冲突，只在提交操作时检查是否违反数据完整性。</p>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><h3 id="什么叫视图？"><a href="#什么叫视图？" class="headerlink" title="什么叫视图？"></a>什么叫视图？</h3><p><font color="#CD0000" size="3">视图是一种虚拟的表，具有和物理表相同的功能</font>。可以对视图进行增，改，查操作，视图通常是有一个表或者多个表的行或列的子集。对视图的修改会影响基本表。相比多表查询，它使得我们获取数据更容易。 </p>
+<h3 id="视图的优缺点"><a href="#视图的优缺点" class="headerlink" title="视图的优缺点"></a>视图的优缺点</h3><p>优点：<br>（1）视图可以有选择性的选取数据库里的一部分。<br>（2）用户可以从简单的查询中得到结果。<br>（3）维护数据的独立性，试图可从多个表检索数据。<br>（4）对于相同的数据可产生不同的视图。<br>缺点：<br>查询视图时，必须把视图的查询转化成对基本表的查询，如果这个视图是由一个复杂的多表查询所定义，那么就无法更改数据。</p>
+<h3 id="表和视图的关系"><a href="#表和视图的关系" class="headerlink" title="表和视图的关系"></a>表和视图的关系</h3><p>视图其实就是一条查询sql语句，用于显示一个或多个表或其他视图中的相关数据。表就是关系数据库中实际存储数据用的。</p>
+<h2 id="游标"><a href="#游标" class="headerlink" title="游标"></a>游标</h2><h3 id="什么是游标？"><a href="#什么是游标？" class="headerlink" title="什么是游标？"></a>什么是游标？</h3><p><font color="#CD0000" size="3">游标实际上是一种能从包括多条数据记录的结果集中每次提取一条记录进行处理的机制</font>。</p>
+<h3 id="什么时候用游标？"><a href="#什么时候用游标？" class="headerlink" title="什么时候用游标？"></a>什么时候用游标？</h3><p>一般不使用游标，但是<font color="#CD0000" size="3">需要逐条处理数据</font>的时候，游标显得十分重要。</p>
+<h3 id="游标的使用步骤"><a href="#游标的使用步骤" class="headerlink" title="游标的使用步骤"></a>游标的使用步骤</h3><p>（1）定义游标：<br>declare cursor 游标名称 for  select查询语句 [for {readonly|update}]<br>（2）打开游标：open cursor<br>（3）从游标中操作数据：fetch… …   current of cursor<br>（4）关闭游标：close cursor</p>
+<h2 id="主键和外键"><a href="#主键和外键" class="headerlink" title="主键和外键"></a>主键和外键</h2><h3 id="键的分类"><a href="#键的分类" class="headerlink" title="键的分类"></a>键的分类</h3><p><font color="#CD0000" size="3">超键</font>：在关系中能唯一标识元组的属性集称为关系模式的超键。一个属性可以作为一个超键，多个属性组合在一起也可以作为一个超键。超键包含候选键和主键。</p>
+<p><font color="#CD0000" size="3">候选键</font>：是最小超键，即没有冗余元素的超键。</p>
+<p><font color="#CD0000" size="3">主键：数据库表中对储存数据对象予以唯一和完整标识的数据列或属性的组合</font>。一个数据列只能有一个主键，且主键的取值不能为空值（Null）。</p>
+<p><font color="#CD0000" size="3">外键：在一个表中存在的另一个表的主键称此表的外键</font>。</p>
+<h3 id="主键和外键的区别？"><a href="#主键和外键的区别？" class="headerlink" title="主键和外键的区别？"></a>主键和外键的区别？</h3><p><font color="#CD0000" size="3">主键在本表中是唯一的、不可为空，外键可以重复可以为空；<br>外键和另一张表的主键关联，不能创建对应表中不存在的外键。</font></p>
+<h3 id="在删除主表记录时，一并删除从表相关联的记录？"><a href="#在删除主表记录时，一并删除从表相关联的记录？" class="headerlink" title="在删除主表记录时，一并删除从表相关联的记录？"></a>在删除主表记录时，一并删除从表相关联的记录？</h3><p>如果两张表存在主外键关系，那么在删除主键表的记录时，如果从表有相关联的记录，那么将导致删除失败。<br>在定义外键约束时，可以同时指定3种删除策略：<br>一是将从表记录一并删除（级联删除）；<br>二是将从表记录外键字段设置为NULL；<br>三是将从表记录外键字段设置为默认值。<br>级联删除示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alter table 从表名</span><br><span class="line">add constraint 外键名</span><br><span class="line">foreign key(字段名) references 主表名(字段名)</span><br><span class="line">on delete cascade</span><br></pre></td></tr></table></figure></p>
+<h2 id="数据库约束"><a href="#数据库约束" class="headerlink" title="数据库约束"></a>数据库约束</h2><h3 id="什么是数据库约束"><a href="#什么是数据库约束" class="headerlink" title="什么是数据库约束"></a>什么是数据库约束</h3><p><font color="#CD0000" size="3">数据库约束用于保证数据库表数据的完整性</font>（正确性和一致性，包括<font color="#CD0000" size="3">实体完整性、参照完整性、用户定义完整性</font>）。可以通过定义约束\索引\触发器来保证数据的完整性。</p>
+<h3 id="数据库约束的分类"><a href="#数据库约束的分类" class="headerlink" title="数据库约束的分类"></a>数据库约束的分类</h3><p><font color="#CD0000" size="3">主键约束：primary key；<br>外键约束：foreign key；<br>唯一约束：unique；<br>检查约束：check；<br>空值约束：not null；<br>默认值约束：default。</font></p>
+<h3 id="维护数据库的完整性和一致性，你喜欢用触发器还是自写业务逻辑？为什么？"><a href="#维护数据库的完整性和一致性，你喜欢用触发器还是自写业务逻辑？为什么？" class="headerlink" title="维护数据库的完整性和一致性，你喜欢用触发器还是自写业务逻辑？为什么？"></a>维护数据库的完整性和一致性，你喜欢用触发器还是自写业务逻辑？为什么？</h3><p>答：尽可能使用约束，如check,主键，外键，非空字段等来约束，这样做效率最高，也最方便。其次是使用触发器，这种方法可以保证无论什么业务系统访问数据库都可以保证数据的完整新和一致性。最后考虑的是自写业务逻辑，但这样做麻烦，编程复杂，效率低下。</p>
+<h2 id="数据库三范式"><a href="#数据库三范式" class="headerlink" title="数据库三范式"></a>数据库三范式</h2><h3 id="简化版"><a href="#简化版" class="headerlink" title="简化版"></a>简化版</h3><p><font color="#CD0000" size="3">第一范式：表中每个字段都不能再分。<br>第二范式：满足第一范式并且表中的非主键字段都依赖于主键字段。<br>第三范式：满足第二范式并且表中的非主键字段必须不传递依赖于主键字段，即消除传递依赖，方便理解，可以看做是“消除冗余”。</font></p>
+<h3 id="详细版"><a href="#详细版" class="headerlink" title="详细版"></a>详细版</h3><p>第一范式（1NF）：数据库表中的字段都是单一属性的，不可再分。这个单一属性由基本类型构成，包括整型、实数、字符型、逻辑型、日期型等。<br>第二范式（2NF）：数据库表中不存在非关键字段对任一候选关键字段的部分函数依赖（部分函数依赖指的是存在组合关键字中的某些字段决定非关键字段的情况），也即所有非关键字段都完全依赖于任意一组候选关键字。<br>第三范式（3NF）：在第二范式的基础上，数据表中如果不存在非关键字段对任一候选关键字段的传递函数依赖则符合第三范式。所谓传递函数依赖，指的是如 果存在”A → B → C”的决定关系，则C传递函数依赖于A。因此，满足第三范式的数据库表应该不存在如下依赖关系： 关键字段 → 非关键字段 x → 非关键字段y。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="列举几种表连接方式？"><a href="#列举几种表连接方式？" class="headerlink" title="列举几种表连接方式？"></a>列举几种表连接方式？</h3><p><font color="#CD0000" size="3"><br>（1）内联接（Inner Join）：匹配2张表中相关联的记录。<br>（2）左外联接（Left Outer Join）：除了匹配2张表中相关联的记录外，还会匹配左表中剩余的记录，右表中未匹配到的字段用NULL表示。<br>（3）右外联接（Right Outer Join）：除了匹配2张表中相关联的记录外，还会匹配右表中剩余的记录，左表中未匹配到的字段用NULL表示。<br>（4）全外连接：连接的表中不匹配的数据全部会显示出来。<br>（5）交叉连接：笛卡尔效应，显示的结果是链接表数的乘积。<br></font></p>
+<h3 id="union和union-all有什么不同"><a href="#union和union-all有什么不同" class="headerlink" title="union和union all有什么不同?"></a>union和union all有什么不同?</h3><p>（1）<font color="#CD0000" size="3">union在进行表链接后会筛选掉重复的记录</font>，所以在表链接后会对所产生的结果集进行排序运算，删除重复的记录再返回结果。实际大部分应用中是不会产生重复的记录，最常见的是过程表与历史表union。<br>（2）<font color="#CD0000" size="3">union all只是简单的将两个结果合并后就返回</font>。这样，如果返回的两个结果集中有重复的数据，那么返回的结果集就会包含重复的数据了。<br>（3）从效率上说，<font color="#CD0000" size="3">union all 要比union快很多</font>，所以，如果可以确认合并的两个结果集中不包含重复的数据的话，那么就使用union all。</p>
+<h3 id="什么是内存泄漏？"><a href="#什么是内存泄漏？" class="headerlink" title="什么是内存泄漏？"></a>什么是内存泄漏？</h3><p>答：一般我们所说的内存泄漏指的是<font color="#CD0000" size="3">堆内存的泄漏</font>。堆内存是程序从堆中为其分配的，大小任意的，使用完后要显示释放内存。当应用程序用关键字new等创建对象时，就从堆中为它分配一块内存，使用完后程序调用free或者delete释放该内存，否则就说该内存就不能被使用，我们就说该内存被泄漏了。</p>
+<h3 id="如何优化查询语句？"><a href="#如何优化查询语句？" class="headerlink" title="如何优化查询语句？"></a>如何优化查询语句？</h3><p>（1）建索引；<br>（2）减少表之间的关联；<br>（3）优化sql，尽量让sql很快定位数据，不要让sql做全表查询，使用索引,把数据量大的表排在前面；<br>（4）简化查询字段，没用的字段不要，尽量返回少量数据；<br>（5）尽量用PreparedStatement来查询，不要用Statement。</p>
+<h2 id="Oracle数据库"><a href="#Oracle数据库" class="headerlink" title="Oracle数据库"></a>Oracle数据库</h2><h3 id="Oracle基本数据类型"><a href="#Oracle基本数据类型" class="headerlink" title="Oracle基本数据类型"></a>Oracle基本数据类型</h3><p>（1）<font color="#CD0000" size="3">字符串类型</font> char、nchar、varchar、varchar2、nvarchar2<br>（2）<font color="#CD0000" size="3">数字类型</font> number、integer<br>（3）<font color="#CD0000" size="3">浮点类型</font> binary_float、binary_double、float<br>（4）<font color="#CD0000" size="3">日期类型</font> date、 timestamp<br>（5）<font color="#CD0000" size="3">LOB类型</font> blob、clob、nclob、bfile</p>
+<h3 id="Oracle语句类型"><a href="#Oracle语句类型" class="headerlink" title="Oracle语句类型"></a>Oracle语句类型</h3><p>Oracle语句分三类：DDL、DML、DCL。<br>（1）<font color="#CD0000" size="3">DDL（Data Definition Language）数据定义语言</font>，包括： </p>
+<p><font color="#CD0000" size="3">Create语句</font>：可以创建数据库和数据库的一些对象。 </p>
+<p><font color="#CD0000" size="3">Drop语句</font>：可以删除数据表、索引、触发程序、条件约束以及数据表的权限等。 Alter语句：修改数据表定义及属性。 </p>
+<p><font color="#CD0000" size="3">Truncate语句</font>：删除表中的所有记录,包括所有空间分配的记录被删除。<br>（2）<font color="#CD0000" size="3">DML（Data Manipulation Language）数据操控语言</font>，包括： </p>
+<p><font color="#CD0000" size="3">Insert语句</font>：向数据表张插入一条记录。 </p>
+<p><font color="#CD0000" size="3">Delete语句</font>：删除数据表中的一条或多条记录，也可以删除数据表中的所有记录，但是它的操作对象仍是记录。 </p>
+<p><font color="#CD0000" size="3">Update语句</font>：用于修改已存在表中的记录的内容。<br>（3）<font color="#CD0000" size="3">DCL（Data Control Language）数据库控制语言</font>，包括： </p>
+<p><font color="#CD0000" size="3">Grant语句</font>：允许对象的创建者给某用户或某组或所有用户（PUBLIC）某些特定的权限。 </p>
+<p><font color="#CD0000" size="3">Revoke语句</font>：可以废除某用户或某组或所有用户访问权限。</p>
+<h3 id="char、varchar2、varchar"><a href="#char、varchar2、varchar" class="headerlink" title="char、varchar2、varchar"></a>char、varchar2、varchar</h3><p>（1）char的长度是固定的，而varchar2的长度是可以变化的，varchar是varchar2的同义词；char的效率要被varchar2的效率高。<br>（2）目前，工业标准的varchar类型可以存储空字符串； Oracle自己开发了一个数据类型varchar2,将在数据库中存储空字符串的特性改为存储null值。</p>
+<h3 id="Oracle和Mysql的区别？"><a href="#Oracle和Mysql的区别？" class="headerlink" title="Oracle和Mysql的区别？"></a>Oracle和Mysql的区别？</h3><p>（1）库函数不同。<br>（2）Oracle是用表空间来管理的，Mysql不是。<br>（3）显示当前所有的表、用户、改变连接用户、显示当前连接用户、执行外部脚本的语句不同。<br>（4）分页查询时候时候，Mysql用limit ，Oracle用rownum</p>
+<h3 id="order-by与group-by"><a href="#order-by与group-by" class="headerlink" title="order by与group by"></a>order by与group by</h3><p>（1）<font color="#CD0000" size="3">order by 排序查询</font>，[asc升序、desc降序]<br>（2）<font color="#CD0000" size="3">group by 分组查询</font>，having 只能用于group by子句、作用于组内，having条件子句可以直接跟函数表达式。<br>（3）<font color="#CD0000" size="3">使用group by 子句的查询语句需要使用聚合函数</font>。</p>
+<h3 id="commit提交"><a href="#commit提交" class="headerlink" title="commit提交"></a>commit提交</h3><p>oracle的commit就是DML语句提交数据，在未提交前的操作更新的都是内存，没有更新到物理文件中。<font color="#CD0000" size="3">commit即为从内存更新到物理文件</font>。</p>
+<h3 id="PL-SQL"><a href="#PL-SQL" class="headerlink" title="PL/SQL"></a>PL/SQL</h3><p>PL/SQL是一种程序语言，叫做过程化SQL语言（Procedural Language/SQL）。PL/SQL是Oracle数据库对SQL语句的扩展。<font color="#CD0000" size="3">在普通SQL语句的使用上增加了编程语言的特点</font>，所以PL/SQL把数据操作和查询语句组织在PL/SQL代码的过程性单元中，通过逻辑判断、循环等操作实现复杂的功能或者计算。PL/SQL 只有 Oracle 数据库有。 MySQL 目前不支持 PL/SQL 的。</p>
+<h3 id="序列的作用"><a href="#序列的作用" class="headerlink" title="序列的作用"></a>序列的作用</h3><p><font color="#CD0000" size="3">Oracle使用序列来生成唯一编号，用来处理一个表中自增字段</font>。<br>Oracle序列是原子对象，并且是一致的。也就是说，一旦您访问一个序列号，Oracle将在处理下一个请求之前自动递增下一个编号，从而确保不会出现重复值。</p>
+<h3 id="truncate、-delete、drop"><a href="#truncate、-delete、drop" class="headerlink" title="truncate、 delete、drop"></a>truncate、 delete、drop</h3><p>（1）truncate table在功能上与不带 where子句的 delete 语句相同；二者均删除表中的全部行，但 truncate table比 delete 速度快，且使用的系统和事务日志资源少。 delete 语句每次删除一行，并在事务日志中为所删除的每行记录一项；truncate table通过释放存储表数据所用的数据页来删除数据，并且只在事务日志中记录页的释放。<br>（2）truncate，delete，drop 放在一起比较：<br>truncate table：删除内容、释放空间但不删除定义。<br>delete table：删除内容不删除定义，不释放空间。<br>drop table：删除内容和定义，释放空间。<br>（3）drop、delete与truncate分别在什么场景之下使用？</p>
+<p><font color="#CD0000" size="3">不再需要一张表的时候，用drop；<br>想删除部分数据行时候，用delete，并且带上where子句；<br>保留表而删除所有数据的时候用truncate。<br></font></p>
+<h3 id="Oracle获取系统时间"><a href="#Oracle获取系统时间" class="headerlink" title="Oracle获取系统时间"></a>Oracle获取系统时间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select to_char(sysdate, &apos;yyyy-MM-dd HH24:mi:ss&apos;) from dual;</span><br></pre></td></tr></table></figure>
+<h3 id="Oracle怎么去除去重"><a href="#Oracle怎么去除去重" class="headerlink" title="Oracle怎么去除去重"></a>Oracle怎么去除去重</h3><p>使用distinct关键字</p>
+<h3 id="Oracle分页查询语句"><a href="#Oracle分页查询语句" class="headerlink" title="Oracle分页查询语句"></a>Oracle分页查询语句</h3><p>使用rownum，两种如下：<br>第一种：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from (select t.*,rownum row_num from mytable t) b </span><br><span class="line">where b.row_num between 1 and 10</span><br></pre></td></tr></table></figure></p>
+<p>第二种：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from ( select a.*, rownum rn from mytable a where rownum &lt;= 10 ) where rn &gt;= 1</span><br></pre></td></tr></table></figure></p>
+<p>使用rowid， 如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from scott.emp where rowid in (select rd from </span><br><span class="line">(select rowid as rd ,rownum as rn from scott.emp ) where rn&lt;=6 and rn&gt;3)</span><br></pre></td></tr></table></figure></p>
+<h3 id="Oracle系统主要进程"><a href="#Oracle系统主要进程" class="headerlink" title="Oracle系统主要进程"></a>Oracle系统主要进程</h3><p><font color="#CD0000" size="3">数据写进程(DBWR)</font>：负责将更改的数据从数据库缓冲区高速缓存写入数据文件；</p>
+<p><font color="#CD0000" size="3">日志写进程(LGWR)</font>：将重做日志缓冲区中的更改写入在线重做日志文件；</p>
+<p><font color="#CD0000" size="3">系统监控  (SMON)</font>: 检查数据库的一致性如有必要还会在数据库打开时启动数据库的恢复；</p>
+<p><font color="#CD0000" size="3">进程监控  (PMON)</font>: 负责在一个Oracle 进程失败时清理资源；</p>
+<p><font color="#CD0000" size="3">检查点进程(CKPT)</font>：负责在每当缓冲区高速缓存中的更改永久地记录在数据库中时,更新控制文件和数据文件中的数据库状态信息。；</p>
+<p><font color="#CD0000" size="3">归档进程  (ARCH)</font>：在每次日志切换时把已满的日志组进行备份或归档；</p>
+<p><font color="#CD0000" size="3">恢复进程  (RECO)</font>: 保证分布式事务的一致性,在分布式事务中,要么同时commit,要么同时rollback；</p>
+<p><font color="#CD0000" size="3">作业调度器(CJQ )</font>:  负责将调度与执行系统中已定义好的job,完成一些预定义的工作。</p>
+<h3 id="sql语句1"><a href="#sql语句1" class="headerlink" title="sql语句1"></a>sql语句1</h3><p>现有表:A(id ,name,regdate) B(id,groupid) C(id,name2) ,写出下面的SQL语句<br>（1）统计A表中每个月注册用户数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(*),to_char(regdate,&apos;yyyymm&apos;) from A group by to_char(regdate,&apos;yyyymm&apos;);</span><br></pre></td></tr></table></figure></p>
+<p>（2）统计A表中有姓名相同的用户数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(*) from (select name from A group by name having count(*) &gt;1);</span><br></pre></td></tr></table></figure></p>
+<p>（3）如果表A中有姓名相同的用户,把相同的查出,写入表C中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into C(name2) select name from A group by name having count(*) &gt;1;</span><br></pre></td></tr></table></figure></p>
+<p>（4）A中ID有多个相同的数据,A中姓名相同的ID只保留注册时间最大的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from E where e.regdate &lt; (select max(regdate) from a X where E.id = X.id);</span><br></pre></td></tr></table></figure></p>
+<h3 id="sql语句2"><a href="#sql语句2" class="headerlink" title="sql语句2"></a>sql语句2</h3><p>现有表：Student(S#,SN,SD)学生表， Course(C#,CN,T#)课程表， SC（S#,C#,score）成绩表。<br>（1）查询选了课程‘税收’的学生的学号和名字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select SN,SD from Student where S# in( select S# from Course C , SC where C.C#=SC.C# and CN= ’税收基础’);</span><br></pre></td></tr></table></figure></p>
+<p>（2）查询选课数量大于5的学生的学号和名字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select SN,SD from Student where S# in ( select S# from SC group by S# having count(distinct C#) &gt; 5); )</span><br></pre></td></tr></table></figure></p>
+<p>（3）建立一个学生表students，包括name,age,head_teacher,id,score(姓名，年龄，班主任，学号，成绩)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Create table students ( Id number(9) not null primary key, Name varchar2(40) not null, Age int check(age between 0 and 100), Head_teacher vachar2(40), Score float );</span><br></pre></td></tr></table></figure></p>
+<p>（4）对上表插入一条记录，姓名：张三，年龄：18，班主任：李四，学号：22<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Insert into student(id,name,age,head_teacher) values(‘22’,’张三’,’18’,’李四’)；</span><br></pre></td></tr></table></figure></p>
+<p>（5）对上表中的age+name创建一个索引，并说明它的作用和使用方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Create index student_index on students(age,name);</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+    
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------The end--Thanks for your reading!-------------</div>
+    
+</div>
+    
+    </div>
+
+    
+
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>title:</span>数据库面试基础知识整理</p>
+  <p><span>author:</span>weijuanran</p>
+  <p><span>pubtime:</span>2018/05/15 - 17:05</p>
+  <p><span>update:</span>2018/05/15 - 17:05</p>
+  <p><span>original:</span><a href="/DataBase-Interview-Knowledge/" title="数据库面试基础知识整理">http://weijuanran.cn/DataBase-Interview-Knowledge/</a>
+    <span class="copy-path"  title="click to copy"><i class="fa fa-clipboard" data-clipboard-text="http://weijuanran.cn/DataBase-Interview-Knowledge/"  aria-label="success！"></i></span>
+  </p>
+  <p><span>agree:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">Attribution-NonCommercial-NoDerivatives 4.0 International</a></p>  
+  <p><span></span> Reprinted please keep the original link and author.</p>
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: 'success',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DataBase/" rel="tag"><i class="fa fa-tag"></i>DataBase</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/C-Language-Interview-Program/" rel="next" title="C语言面试程序阅读整理">
+                <i class="fa fa-chevron-left"></i> C语言面试程序阅读整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="weijuanran" />
+            
+              <p class="site-author-name" itemprop="name">weijuanran</p>
+              <p class="site-description motion-element" itemprop="description">high infinity</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/weijuanran" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:weijuanran@163.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/3515135337" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=31654479&auto=0&height=32"></iframe>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储过程"><span class="nav-number">1.</span> <span class="nav-text">存储过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是存储过程"><span class="nav-number">1.1.</span> <span class="nav-text">什么是存储过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储过程的调用"><span class="nav-number">1.2.</span> <span class="nav-text">存储过程的调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储过程的优缺点"><span class="nav-number">1.3.</span> <span class="nav-text">存储过程的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储过程与函数的区别"><span class="nav-number">1.4.</span> <span class="nav-text">存储过程与函数的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">2.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是索引"><span class="nav-number">2.1.</span> <span class="nav-text">什么是索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的作用"><span class="nav-number">2.2.</span> <span class="nav-text">索引的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的优缺点"><span class="nav-number">2.3.</span> <span class="nav-text">索引的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么样的字段适合建索引？"><span class="nav-number">2.4.</span> <span class="nav-text">什么样的字段适合建索引？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么情况下用或不用索引？"><span class="nav-number">2.5.</span> <span class="nav-text">什么情况下用或不用索引？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的类型"><span class="nav-number">2.6.</span> <span class="nav-text">索引的类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#触发器"><span class="nav-number">3.</span> <span class="nav-text">触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是触发器？"><span class="nav-number">3.1.</span> <span class="nav-text">什么是触发器？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#触发器的作用？"><span class="nav-number">3.2.</span> <span class="nav-text">触发器的作用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#触发器分类"><span class="nav-number">3.3.</span> <span class="nav-text">触发器分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务和锁"><span class="nav-number">4.</span> <span class="nav-text">事务和锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是事务？"><span class="nav-number">4.1.</span> <span class="nav-text">什么是事务？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务的四大特性"><span class="nav-number">4.2.</span> <span class="nav-text">事务的四大特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务的三个常用命令"><span class="nav-number">4.3.</span> <span class="nav-text">事务的三个常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是锁？"><span class="nav-number">4.4.</span> <span class="nav-text">什么是锁？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#乐观锁和悲观锁"><span class="nav-number">4.5.</span> <span class="nav-text">乐观锁和悲观锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图"><span class="nav-number">5.</span> <span class="nav-text">视图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么叫视图？"><span class="nav-number">5.1.</span> <span class="nav-text">什么叫视图？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图的优缺点"><span class="nav-number">5.2.</span> <span class="nav-text">视图的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表和视图的关系"><span class="nav-number">5.3.</span> <span class="nav-text">表和视图的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#游标"><span class="nav-number">6.</span> <span class="nav-text">游标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是游标？"><span class="nav-number">6.1.</span> <span class="nav-text">什么是游标？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候用游标？"><span class="nav-number">6.2.</span> <span class="nav-text">什么时候用游标？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#游标的使用步骤"><span class="nav-number">6.3.</span> <span class="nav-text">游标的使用步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主键和外键"><span class="nav-number">7.</span> <span class="nav-text">主键和外键</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#键的分类"><span class="nav-number">7.1.</span> <span class="nav-text">键的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主键和外键的区别？"><span class="nav-number">7.2.</span> <span class="nav-text">主键和外键的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在删除主表记录时，一并删除从表相关联的记录？"><span class="nav-number">7.3.</span> <span class="nav-text">在删除主表记录时，一并删除从表相关联的记录？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库约束"><span class="nav-number">8.</span> <span class="nav-text">数据库约束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是数据库约束"><span class="nav-number">8.1.</span> <span class="nav-text">什么是数据库约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库约束的分类"><span class="nav-number">8.2.</span> <span class="nav-text">数据库约束的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#维护数据库的完整性和一致性，你喜欢用触发器还是自写业务逻辑？为什么？"><span class="nav-number">8.3.</span> <span class="nav-text">维护数据库的完整性和一致性，你喜欢用触发器还是自写业务逻辑？为什么？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库三范式"><span class="nav-number">9.</span> <span class="nav-text">数据库三范式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简化版"><span class="nav-number">9.1.</span> <span class="nav-text">简化版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#详细版"><span class="nav-number">9.2.</span> <span class="nav-text">详细版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">10.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#列举几种表连接方式？"><span class="nav-number">10.1.</span> <span class="nav-text">列举几种表连接方式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#union和union-all有什么不同"><span class="nav-number">10.2.</span> <span class="nav-text">union和union all有什么不同?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是内存泄漏？"><span class="nav-number">10.3.</span> <span class="nav-text">什么是内存泄漏？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何优化查询语句？"><span class="nav-number">10.4.</span> <span class="nav-text">如何优化查询语句？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Oracle数据库"><span class="nav-number">11.</span> <span class="nav-text">Oracle数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle基本数据类型"><span class="nav-number">11.1.</span> <span class="nav-text">Oracle基本数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle语句类型"><span class="nav-number">11.2.</span> <span class="nav-text">Oracle语句类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#char、varchar2、varchar"><span class="nav-number">11.3.</span> <span class="nav-text">char、varchar2、varchar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle和Mysql的区别？"><span class="nav-number">11.4.</span> <span class="nav-text">Oracle和Mysql的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#order-by与group-by"><span class="nav-number">11.5.</span> <span class="nav-text">order by与group by</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#commit提交"><span class="nav-number">11.6.</span> <span class="nav-text">commit提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PL-SQL"><span class="nav-number">11.7.</span> <span class="nav-text">PL/SQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#序列的作用"><span class="nav-number">11.8.</span> <span class="nav-text">序列的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#truncate、-delete、drop"><span class="nav-number">11.9.</span> <span class="nav-text">truncate、 delete、drop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle获取系统时间"><span class="nav-number">11.10.</span> <span class="nav-text">Oracle获取系统时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle怎么去除去重"><span class="nav-number">11.11.</span> <span class="nav-text">Oracle怎么去除去重</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle分页查询语句"><span class="nav-number">11.12.</span> <span class="nav-text">Oracle分页查询语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle系统主要进程"><span class="nav-number">11.13.</span> <span class="nav-text">Oracle系统主要进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql语句1"><span class="nav-number">11.14.</span> <span class="nav-text">sql语句1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql语句2"><span class="nav-number">11.15.</span> <span class="nav-text">sql语句2</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">weijuanran</span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  visitors:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v="></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v="></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v="></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v="></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v="></script>
+<script type="text/javascript" src="/js/src/post-details.js?v="></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v="></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+<script type="text/javascript" src="/js/src/star.js"></script>
+</html>
